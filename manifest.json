@@ -1,7 +1,7 @@
 {
   "name": "Temouz Scouts",
   "short_name": "Temouz",
-  "start_url": "download.html",
+  "start_url": "Home.html",
   "display": "standalone",
   "background_color": "#004d40",
   "theme_color": "#00796b",

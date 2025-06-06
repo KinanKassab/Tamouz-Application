@@ -1,29 +1,246 @@
-<!DOCTYPE html> 
-<html lang="ar"> 
-<head> 
-  <meta charset="UTF-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>كشاف </title> 
-  <link rel="stylesheet" href="style.css"> 
-  <link rel="manifest" href="manifest.json"> 
-</head> 
-<body> 
-  <h1>مرحبا بك في كشاف  🏕️</h1> 
-  <section> 
-    <h2>📆 آخر الفعاليات</h2> 
-    <ul id="events"> 
-      <li>خميس الكشافة - 10/6/2025</li> 
-      <li>رحلة جبلية - 14/6/2025</li> 
-    </ul> 
-  </section> 
-  <section> 
-    <h2>📝 تسجيل الحضور</h2> 
-    <form id="attendanceForm"> 
-      <input type="text" id="name" placeholder="اسمك" required> 
-      <button type="submit">سجّل</button> 
-    </form> 
-    <div id="attendanceList"></div> 
-  </section> 
-  <script src="app.js"></script> 
-</body> 
-</html> 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>تطبيق الكشاف - الرئيسية</title>
+  <style>
+    :root {
+      --color-bg: #f0f4f8;
+      --color-text: #333;
+      --color-primary: #2e7d32;
+      --color-primary-dark: #1b4d1a;
+      --color-nav-bg: white;
+      --color-nav-text: #555;
+      --color-nav-active: #2e7d32;
+      --color-hover-bg: #e0f2f1;
+      --color-settings: #ff7043;
+      --btn-bg: #388e3c;
+      --btn-hover-bg: #2e7d32;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      padding: 1.5rem 1rem;
+      background-color: var(--color-primary);
+      color: white;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 600px;
+      margin: 2rem auto 5rem;
+      text-align: center;
+    }
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+    main p {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      max-width: 450px;
+      line-height: 1.5;
+      color: #555;
+    }
+    button.login-btn {
+      background-color: var(--btn-bg);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(56, 142, 60, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+    button.login-btn:hover,
+    button.login-btn:focus {
+      background-color: var(--btn-hover-bg);
+      outline: none;
+      transform: scale(1.05);
+    }
+    nav {
+      background-color: var(--color-nav-bg);
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      box-shadow: 0 -1px 8px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--color-nav-text);
+      font-size: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: color 0.3s, transform 0.3s;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+    }
+    nav a.active {
+      color: var(--color-nav-active);
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+      transform: scale(1.1);
+    }
+    nav a span {
+      font-size: 0.85rem;
+      margin-top: 2px;
+      user-select: none;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+    body.dark {
+      --color-bg: #121212;
+      --color-text: #e0e0e0;
+      --color-primary: #81c784;
+      --color-nav-bg: #1e1e1e;
+      --color-nav-text: #bbb;
+      --color-nav-active: #81c784;
+      --btn-bg: #4caf50;
+      --btn-hover-bg: #388e3c;
+    }
+    #darkModeToggle {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background-color: var(--color-primary);
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+      z-index: 20;
+    }
+    #darkModeToggle:hover {
+      background-color: var(--color-primary-dark);
+    }
+    @media (max-width: 480px) {
+      main {
+        margin: 2rem 1rem 6rem;
+      }
+      nav a {
+        font-size: 1.1rem;
+      }
+      nav a span {
+        font-size: 0.7rem;
+      }
+      button.login-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      #darkModeToggle {
+        bottom: 60px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+تطبيق تموز  
+</header>
+
+  <main id="content">
+    <h2>مرحباً بك في عالم الكشاف!</h2>
+    <p>تابع نشاطاتك، تعلم مهارات جديدة، وتواصل مع فريقك أينما كنت.</p>
+    <button class="login-btn" onclick="alert('جاري تسجيل الدخول...');">تسجيل الدخول</button>
+  </main>
+
+  <nav>
+    <a href="#" data-page="home" class="active">🏠<span>الرئيسية</span></a>
+    <a href="#" data-page="schedule">📅<span>الأنشطة</span></a>
+    <a href="#" data-page="guide">🧭<span>الدليل</span></a>
+    <a href="#" data-page="songs">🎵<span>الأناشيد</span></a>
+    <a href="#" data-page="settings">⚙️<span>الإعدادات</span></a>
+  </nav>
+
+  <button id="darkModeToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+
+<script>
+  const pagesContent = {
+    home: `
+      <h2>مرحباً بك في عالم الكشاف!</h2>
+      <p>تابع نشاطاتك، تعلم مهارات جديدة، وتواصل مع فريقك أينما كنت.</p>
+      <button class="login-btn" onclick="alert('جاري تسجيل الدخول...');">تسجيل الدخول</button>
+    `,
+    schedule: `<h2>📅 جدول الأنشطة</h2><p>صفحة جدول الأنشطة تحت التطوير...</p>`,
+    guide: `<h2>🧭 دليل الكشاف</h2><p>صفحة الدليل تحت التطوير...</p>`,
+    songs: `<h2>🎵 الأناشيد</h2><p>صفحة الأناشيد تحت التطوير...</p>`,
+    settings: `<h2>⚙️ الإعدادات</h2><p>صفحة الإعدادات تحت التطوير...</p>`
+  };
+
+  const contentEl = document.getElementById('content');
+  const navLinks = document.querySelectorAll('nav a');
+  const darkModeToggle = document.getElementById('darkModeToggle');
+
+  if(localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark');
+  }
+
+  function loadPage(page) {
+    contentEl.innerHTML = pagesContent[page] || '<p>الصفحة غير موجودة</p>';
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.page === page);
+    });
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      loadPage(link.dataset.page);
+    });
+  });
+
+  darkModeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    if(document.body.classList.contains('dark')) {
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      localStorage.removeItem('darkMode');
+    }
+  });
+
+  loadPage('home');
+</script>
+
+</body>
+</html>

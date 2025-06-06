@@ -129,12 +129,39 @@
     }
   </style>
 </head>
+<script>
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBtn').style.display = 'block';
+  });
+
+  document.getElementById('installBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choice) => {
+        if (choice.outcome === 'accepted') {
+          console.log('👍 المستخدم وافق');
+        } else {
+          console.log('👎 المستخدم رفض');
+        }
+        deferredPrompt = null;
+      });
+    } else {
+      alert("🚫 التثبيت غير متاح حالياً. جرّب من متصفح يدعم PWA.");
+    }
+  });
+</script>
+
 <body>
 
   <header>
     <h1>انضم لتطبيقنا الأول من نوعه - مغامرات، تعلم، وروح فريق ما بتنطفئ!</h1>
     <p class="lead">تطبيق الكشافة الأول للفوج الأول، يساعدك على متابعة الأنشطة، تعلم المهارات، وتنظيم اللقاءات - حتى بدون إنترنت!</p>
-    <button class="cta-button" onclick="alert('جاهز للتحميل!')">حمّل التطبيق الآن</button>
+<button class="cta-button" id="installBtn">📲 حمّل التطبيق الآن</button>
+
   </header>
 
   <ul class="features">
@@ -151,9 +178,11 @@
 </body>
 
 <script>
+    
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   }
+
 </script>
 
 </html>
