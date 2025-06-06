@@ -19,17 +19,20 @@
       min-height: 100vh;
       text-align: center;
     }
+
     header {
       margin-top: 2rem;
       max-width: 600px;
       width: 100%;
     }
+
     h1 {
       color: #2e7d32;
       font-size: 2.2rem;
       margin-bottom: 0.5rem;
       line-height: 1.2;
     }
+
     p.lead {
       font-size: 1.1rem;
       margin-bottom: 2rem;
@@ -39,6 +42,7 @@
       margin-right: auto;
       line-height: 1.4;
     }
+
     .cta-button {
       background-color: #388e3c;
       color: white;
@@ -54,11 +58,13 @@
       width: 100%;
       max-width: 300px;
     }
+
     .cta-button:hover,
     .cta-button:focus {
       background-color: #2e7d32;
       outline: none;
     }
+
     ul.features {
       list-style: none;
       padding: 0;
@@ -70,6 +76,7 @@
       max-width: 600px;
       width: 100%;
     }
+
     ul.features li {
       background: white;
       padding: 1rem 1.5rem;
@@ -80,6 +87,7 @@
       max-width: 280px;
       box-sizing: border-box;
     }
+
     footer {
       font-size: 0.8rem;
       color: #999;
@@ -100,12 +108,8 @@
     }
 
     @keyframes moveBG {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 100px 100px;
-      }
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 100px; }
     }
 
     @media (max-width: 480px) {
@@ -126,9 +130,61 @@
         max-width: 100%;
       }
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding: 1rem;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 1.5rem;
+      border: 1px solid #ccc;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: right;
+      direction: rtl;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      color: #2e7d32;
+    }
+
+    .modal-content ol {
+      margin: 0.5rem 0 1.5rem;
+      padding-right: 1.5rem;
+      color: #333;
+    }
+
+    .modal-content li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .close {
+      color: #aaa;
+      float: left;
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
   </style>
 </head>
-
 <body>
 
   <header>
@@ -148,33 +204,55 @@
     &copy; 2025 كشافة تموز - كل الحقوق محفوظة
   </footer>
 
+  <!-- Modal -->
+  <div id="installModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>📲 خطوات تثبيت التطبيق</h2>
+      <div class="platform">
+        <h3>🔹 iPhone (Safari):</h3>
+        <ol>
+          <li>افتح المتصفح Safari وادخل إلى الموقع.</li>
+          <li>اضغط على زر <strong>المشاركة</strong> في أسفل الشاشة.</li>
+          <li>اختر <strong>إضافة إلى الشاشة الرئيسية</strong>.</li>
+          <li>اضغط على <strong>إضافة</strong>.</li>
+        </ol>
+      </div>
+      <div class="platform">
+        <h3>🔹 Android (Chrome):</h3>
+        <ol>
+          <li>افتح المتصفح Chrome وادخل إلى الموقع.</li>
+          <li>اضغط على زر <strong>⋮</strong> في أعلى اليمين.</li>
+          <li>اختر <strong>إضافة إلى الشاشة الرئيسية</strong>.</li>
+          <li>اضغط على <strong>إضافة</strong>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // تسجيل service worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/Tamouz-Application/service-worker.js')
-        .then(() => console.log("✔️ Service Worker تم تسجيله"))
-        .catch(err => console.error("❌ فشل التسجيل", err));
+    const modal = document.getElementById("installModal");
+    const btn = document.getElementById("installBtn");
+    const span = document.getElementsByClassName("close")[0];
+
+    btn.onclick = function() {
+      modal.style.display = "block";
     }
 
-    // إعداد زر التثبيت
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      const installBtn = document.getElementById('installBtn');
-      installBtn.style.display = 'block';
-      installBtn.addEventListener('click', () => {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choice) => {
-          if (choice.outcome === 'accepted') {
-            console.log('✅ تم التثبيت');
-          } else {
-            console.log('❌ رفض التثبيت');
-          }
-          deferredPrompt = null;
-        });
-      });
-    });
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
   </script>
 
 </body>

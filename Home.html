@@ -29,7 +29,7 @@
       transition: background-color 0.3s, color 0.3s;
     }
     header {
-      padding: 1.5rem 1rem;
+      padding: 1rem 1.5rem;
       background-color: var(--color-primary);
       color: white;
       text-align: center;
@@ -37,7 +37,49 @@
       font-size: 1.8rem;
       letter-spacing: 0.03em;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      direction: rtl;
     }
+    /* البروفايل (يسار) */
+    .profile-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left; /* خلي النص على اليسار عشان بجنب الصورة */
+    }
+    .profile-pic {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      flex-shrink: 0;
+    }
+    .profile-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .profile-name {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    .profile-role {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin: 0;
+    }
+    /* اللوغو (يمين) */
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
     main {
       flex: 1;
       padding: 2rem 1rem;
@@ -135,8 +177,8 @@
     }
     #darkModeToggle {
       position: fixed;
-      bottom: 70px;
-      right: 20px;
+      bottom: 90px;
+      right: 10px;
       background-color: var(--color-primary);
       border: none;
       color: white;
@@ -170,14 +212,39 @@
         padding: 0.5rem 0.8rem;
         font-size: 0.9rem;
       }
+      .profile-container {
+        gap: 8px;
+      }
+      .profile-pic {
+        width: 50px;
+        height: 50px;
+      }
+      .profile-name {
+        font-size: 1rem;
+      }
+      .profile-role {
+        font-size: 0.75rem;
+      }
+      .logo-container img {
+        height: 40px;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-تطبيق تموز  
-</header>
+    <div class="profile-container" aria-label="معلومات العضو">
+      <img src="images/Profiles/Kinan.jpg" alt="صورة العضو" class="profile-pic" />
+      <div class="profile-text">
+        <p class="profile-name">كنان</p>
+        <p class="profile-role">عضو</p>
+      </div>
+    </div>
+    <div class="logo-container" aria-label="لوغو المشروع">
+      <img src="images/logo.png" alt="لوغو المشروع" />
+    </div>
+  </header>
 
   <main id="content">
     <h2>مرحباً بك في عالم الكشاف!</h2>
@@ -238,8 +305,6 @@
       localStorage.removeItem('darkMode');
     }
   });
-
-  loadPage('home');
 </script>
 
 </body>
