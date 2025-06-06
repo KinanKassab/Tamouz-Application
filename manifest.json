@@ -1,18 +1,18 @@
 {
   "name": "Temouz Scouts",
   "short_name": "Temouz",
-  "start_url": "Home.html",
+  "start_url": "/Tamouz-Application/Home.html",
   "display": "standalone",
   "background_color": "#004d40",
   "theme_color": "#00796b",
   "icons": [
     {
-      "src": "/icons/temouz-icon-192.png",
+      "src": "/Tamouz-Application/icons/icon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/icons/temouz-icon-512.png",
+      "src": "/Tamouz-Application/icons/Logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }
