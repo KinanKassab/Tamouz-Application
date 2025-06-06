@@ -1,24 +1,24 @@
-const CACHE_NAME = 'scout-cache-v1';
-const FILES_TO_CACHE = [
+const CACHE_NAME = 'tamouz-cache-v1';
+const urlsToCache = [
   '/',
-  '/Download.html',
-  '/index.html',
+  '/download.html',
+  '/app.js',
   '/manifest.json',
   '/style.css',
-  '/app.js',
+  '/index.html',
+  '/images/Logo.png',
   '/images/icon.png',
-  '/service-worker.js',
-  // أي ملفات إضافية تحتاجها
+  '/Home.html'
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => response || fetch(event.request))
   );
 });
