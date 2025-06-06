@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>تطبيق الكشاف - الرئيسية</title>
+  <link rel="stylesheet" href="Main.css" />
+</head>
+<body>
+
+  <header>
+    <div class="profile-container" aria-label="معلومات العضو">
+      <img src="images/Profiles/Kinan.jpg" alt="صورة العضو" class="profile-pic" />
+      <div class="profile-text">
+        <p class="profile-name">كنان</p>
+        <p class="profile-role">عضو</p>
+      </div>
+    </div>
+    <div class="logo-container" aria-label="لوغو المشروع">
+      <img src="logo.png" alt="لوغو المشروع" />
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- المحتوى يتغير من الجافا سكريبت -->
+  </main>
+
+  <nav>
+    <a href="#" data-page="home" class="active">🏠<span>الرئيسية</span></a>
+    <a href="#" data-page="schedule">📅<span>الأنشطة</span></a>
+    <a href="#" data-page="guide">🧭<span>الدليل</span></a>
+    <a href="#" data-page="songs">🎵<span>الأناشيد</span></a>
+
+    <button class="more-btn" aria-haspopup="true" aria-expanded="false" aria-label="زر المزيد">⋯<span>المزيد</span></button>
+
+    <div class="more-dropdown" role="menu" aria-label="قائمة المزيد">
+      <a href="#" data-page="info" role="menuitem">ℹ️ معلومات</a>
+      <a href="#" data-page="settings" role="menuitem">⚙️ الإعدادات</a>
+    </div>
+  </nav>
+
+  <button id="darkModeToggle" aria-label="تبديل الوضع الداكن">🌙</button>
+
+  <script src="Main.js"></script>
+</body>
+</html>
