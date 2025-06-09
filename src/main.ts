@@ -1,4 +1,4 @@
-import { createIcons } from 'lucide';
+import { CreativeCommons as createIcons } from 'lucide';
 import { App } from './core/App';
 import { ThemeManager } from './core/ThemeManager';
 import { PWAManager } from './core/PWAManager';
