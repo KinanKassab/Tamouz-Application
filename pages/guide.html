@@ -1,0 +1,631 @@
+<div class="page-container">
+  <div class="guide-header">
+    <h2>🧭 دليل الكشاف الشامل</h2>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="ابحث في الدليل..." onkeyup="searchGuide()">
+      <button class="search-btn">🔍</button>
+    </div>
+  </div>
+
+  <div class="guide-categories">
+    <button class="category-btn active" data-category="all" onclick="filterCategory('all')">الكل</button>
+    <button class="category-btn" data-category="knots" onclick="filterCategory('knots')">العقد</button>
+    <button class="category-btn" data-category="survival" onclick="filterCategory('survival')">البقاء</button>
+    <button class="category-btn" data-category="navigation" onclick="filterCategory('navigation')">التوجه</button>
+    <button class="category-btn" data-category="first-aid" onclick="filterCategory('first-aid')">الإسعاف</button>
+    <button class="category-btn" data-category="camping" onclick="filterCategory('camping')">التخييم</button>
+  </div>
+
+  <div class="guide-content" id="guideContent">
+    
+    <!-- قسم العقد -->
+    <div class="guide-section" data-category="knots">
+      <h3>🪢 عقد الحبال الأساسية</h3>
+      <div class="skills-grid">
+        <div class="skill-card" onclick="openSkillDetail('square-knot')">
+          <div class="skill-icon">🪢</div>
+          <h4>العقدة المربعة</h4>
+          <p>العقدة الأساسية لربط حبلين من نفس السماكة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('bowline')">
+          <div class="skill-icon">🎯</div>
+          <h4>عقدة البولين</h4>
+          <p>عقدة قوية لا تنزلق، مثالية للإنقاذ</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('clove-hitch')">
+          <div class="skill-icon">🔗</div>
+          <h4>عقدة المشبك</h4>
+          <p>لربط الحبل بعمود أو شجرة بقوة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم البقاء -->
+    <div class="guide-section" data-category="survival">
+      <h3>🏕️ مهارات البقاء</h3>
+      <div class="skills-grid">
+        <div class="skill-card" onclick="openSkillDetail('fire-making')">
+          <div class="skill-icon">🔥</div>
+          <h4>إشعال النار</h4>
+          <p>طرق مختلفة لإشعال النار في الطبيعة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('water-purification')">
+          <div class="skill-icon">💧</div>
+          <h4>تنقية المياه</h4>
+          <p>كيفية الحصول على مياه صالحة للشرب</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('shelter-building')">
+          <div class="skill-icon">🏠</div>
+          <h4>بناء المأوى</h4>
+          <p>إنشاء مأوى مؤقت من المواد الطبيعية</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم التوجه -->
+    <div class="guide-section" data-category="navigation">
+      <h3>🧭 التوجه والملاحة</h3>
+      <div class="skills-grid">
+        <div class="skill-card" onclick="openSkillDetail('compass-use')">
+          <div class="skill-icon">🧭</div>
+          <h4>استخدام البوصلة</h4>
+          <p>قراءة البوصلة والتوجه بدقة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('map-reading')">
+          <div class="skill-icon">🗺️</div>
+          <h4>قراءة الخرائط</h4>
+          <p>فهم الرموز والمقاييس في الخرائط</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('star-navigation')">
+          <div class="skill-icon">⭐</div>
+          <h4>التوجه بالنجوم</h4>
+          <p>استخدام النجوم للتوجه ليلاً</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم الإسعافات الأولية -->
+    <div class="guide-section" data-category="first-aid">
+      <h3>🏥 الإسعافات الأولية</h3>
+      <div class="skills-grid">
+        <div class="skill-card" onclick="openSkillDetail('wound-care')">
+          <div class="skill-icon">🩹</div>
+          <h4>علاج الجروح</h4>
+          <p>تنظيف وتضميد الجروح البسيطة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('cpr')">
+          <div class="skill-icon">❤️</div>
+          <h4>الإنعاش القلبي</h4>
+          <p>تقنيات الإنعاش القلبي الرئوي</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('burns')">
+          <div class="skill-icon">🔥</div>
+          <h4>علاج الحروق</h4>
+          <p>التعامل مع الحروق المختلفة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- قسم التخييم -->
+    <div class="guide-section" data-category="camping">
+      <h3>⛺ مهارات التخييم</h3>
+      <div class="skills-grid">
+        <div class="skill-card" onclick="openSkillDetail('tent-setup')">
+          <div class="skill-icon">⛺</div>
+          <h4>نصب الخيمة</h4>
+          <p>الطريقة الصحيحة لنصب الخيمة</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('cooking')">
+          <div class="skill-icon">🍳</div>
+          <h4>الطبخ في الطبيعة</h4>
+          <p>تحضير الطعام أثناء التخييم</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star">⭐</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-card" onclick="openSkillDetail('weather-reading')">
+          <div class="skill-icon">🌤️</div>
+          <h4>قراءة الطقس</h4>
+          <p>التنبؤ بالطقس من العلامات الطبيعية</p>
+          <div class="difficulty">
+            <span class="difficulty-label">المستوى:</span>
+            <div class="difficulty-stars">
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+              <span class="star filled">⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="progress-section">
+    <h3>📊 تقدمك في المهارات</h3>
+    <div class="progress-overview">
+      <div class="progress-item">
+        <span class="progress-label">العقد</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 60%"></div>
+        </div>
+        <span class="progress-percent">60%</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-label">البقاء</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 40%"></div>
+        </div>
+        <span class="progress-percent">40%</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-label">التوجه</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 80%"></div>
+        </div>
+        <span class="progress-percent">80%</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-label">الإسعاف</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 30%"></div>
+        </div>
+        <span class="progress-percent">30%</span>
+      </div>
+      <div class="progress-item">
+        <span class="progress-label">التخييم</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 70%"></div>
+        </div>
+        <span class="progress-percent">70%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.guide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.search-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.search-container input {
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 25px;
+  font-size: 1rem;
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.search-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.1);
+}
+
+.guide-categories {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-primary);
+  background: white;
+  color: var(--color-primary);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.category-btn:hover,
+.category-btn.active {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.guide-section {
+  margin-bottom: 3rem;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.guide-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+  border-color: var(--color-primary);
+}
+
+.skill-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: var(--color-hover-bg);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem auto;
+}
+
+.skill-card h4 {
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.skill-card p {
+  color: #666;
+  margin: 0 0 1rem 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.difficulty {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.difficulty-label {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.difficulty-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.star.filled {
+  color: #ffc107;
+}
+
+.progress-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+}
+
+.progress-section h3 {
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.progress-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.progress-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-label {
+  min-width: 80px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.progress-bar {
+  flex: 1;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #4caf50);
+  border-radius: 6px;
+  transition: width 0.8s ease;
+}
+
+.progress-percent {
+  min-width: 50px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .guide-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-container {
+    justify-content: center;
+  }
+  
+  .search-container input {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .progress-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .progress-label {
+    min-width: auto;
+    text-align: center;
+  }
+  
+  .progress-percent {
+    text-align: center;
+  }
+}
+</style>
+
+<script>
+function filterCategory(category) {
+  const sections = document.querySelectorAll('.guide-section');
+  const buttons = document.querySelectorAll('.category-btn');
+  
+  // تحديث الأزرار
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.dataset.category === category) {
+      btn.classList.add('active');
+    }
+  });
+  
+  // إظهار/إخفاء الأقسام
+  sections.forEach(section => {
+    if (category === 'all' || section.dataset.category === category) {
+      section.style.display = 'block';
+      section.style.animation = 'slideInUp 0.6s ease-out';
+    } else {
+      section.style.display = 'none';
+    }
+  });
+}
+
+function searchGuide() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const skillCards = document.querySelectorAll('.skill-card');
+  
+  skillCards.forEach(card => {
+    const title = card.querySelector('h4').textContent.toLowerCase();
+    const description = card.querySelector('p').textContent.toLowerCase();
+    
+    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+      card.style.display = 'block';
+      card.style.animation = 'slideInUp 0.4s ease-out';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // إخفاء الأقسام الفارغة
+  const sections = document.querySelectorAll('.guide-section');
+  sections.forEach(section => {
+    const visibleCards = section.querySelectorAll('.skill-card[style*="block"]');
+    if (visibleCards.length === 0 && searchTerm !== '') {
+      section.style.display = 'none';
+    } else {
+      section.style.display = 'block';
+    }
+  });
+}
+
+function openSkillDetail(skillId) {
+  // هنا يمكن فتح صفحة تفصيلية للمهارة
+  alert(`فتح تفاصيل المهارة: ${skillId}`);
+  // يمكن إضافة modal أو الانتقال لصفحة منفصلة
+}
+
+// تحديث شريط التقدم بشكل متحرك
+document.addEventListener('DOMContentLoaded', function() {
+  const progressBars = document.querySelectorAll('.progress-fill');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const width = entry.target.style.width;
+        entry.target.style.width = '0%';
+        setTimeout(() => {
+          entry.target.style.width = width;
+        }, 100);
+      }
+    });
+  });
+  
+  progressBars.forEach(bar => observer.observe(bar));
+});
+</script>

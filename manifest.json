@@ -1,0 +1,139 @@
+{
+  "name": "كشافة تموز - تطبيق الفوج الأول",
+  "short_name": "كشافة تموز",
+  "description": "تطبيق شامل لإدارة أنشطة الكشافة والتواصل مع أعضاء الفوج",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#004d40",
+  "theme_color": "#00796b",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "lifestyle", "social"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "الشاشة الرئيسية للتطبيق"
+    },
+    {
+      "src": "/images/screenshot-desktop.png", 
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "واجهة سطح المكتب"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/images/icon-72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-96.png",
+      "sizes": "96x96", 
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "تسجيل الحضور",
+      "short_name": "حضور",
+      "description": "تسجيل الحضور السريع",
+      "url": "/attendance",
+      "icons": [
+        {
+          "src": "/images/shortcut-attendance.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "الأنشطة",
+      "short_name": "أنشطة", 
+      "description": "عرض جدول الأنشطة",
+      "url": "/schedule",
+      "icons": [
+        {
+          "src": "/images/shortcut-schedule.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "دليل الكشاف",
+      "short_name": "دليل",
+      "description": "دليل المهارات الكشفية",
+      "url": "/guide", 
+      "icons": [
+        {
+          "src": "/images/shortcut-guide.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "files",
+          "accept": ["image/*", "video/*"]
+        }
+      ]
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+scouts",
+      "url": "/handle?type=%s"
+    }
+  ]
+}

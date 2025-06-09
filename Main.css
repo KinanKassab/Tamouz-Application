@@ -1,0 +1,291 @@
+    :root {
+      --color-bg: #f0f4f8;
+      --color-text: #333;
+      --color-primary: #2e7d32;
+      --color-primary-dark: #1b4d1a;
+      --color-nav-bg: white;
+      --color-nav-text: #555;
+      --color-nav-active: #2e7d32;
+      --color-hover-bg: #e0f2f1;
+      --color-settings: #ff7043;
+      --btn-bg: #388e3c;
+      --btn-hover-bg: #2e7d32;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      padding: 1rem 1.5rem;
+      background-color: var(--color-primary);
+      color: white;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 0.03em;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      direction: rtl;
+    }
+    /* البروفايل (يسار) */
+    .profile-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left; /* خلي النص على اليسار عشان بجنب الصورة */
+    }
+    .profile-pic {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+      flex-shrink: 0;
+    }
+    .profile-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .profile-name {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    .profile-role {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin: 0;
+    }
+    /* اللوغو (يمين) */
+    .logo-container img {
+      height: 50px;
+      width: auto;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 600px;
+      margin: 2rem auto 5rem;
+      text-align: center;
+    }
+    main h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary);
+    }
+    main p {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      max-width: 450px;
+      line-height: 1.5;
+      color: #555;
+    }
+    button.login-btn {
+      background-color: var(--btn-bg);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 5px 10px rgba(56, 142, 60, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+    }
+    button.login-btn:hover,
+    button.login-btn:focus {
+      background-color: var(--btn-hover-bg);
+      outline: none;
+      transform: scale(1.05);
+    }
+    nav {
+      background-color: var(--color-nav-bg);
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      box-shadow: 0 -1px 8px rgba(0,0,0,0.1);
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--color-nav-text);
+      font-size: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: color 0.3s, transform 0.3s;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 8px;
+    }
+    nav a.active {
+      color: var(--color-nav-active);
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+      transform: scale(1.1);
+    }
+    nav a span {
+      font-size: 0.85rem;
+      margin-top: 2px;
+      user-select: none;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+    body.dark {
+      --color-bg: #121212;
+      --color-text: #e0e0e0;
+      --color-primary: #81c784;
+      --color-nav-bg: #1e1e1e;
+      --color-nav-text: #bbb;
+      --color-nav-active: #81c784;
+      --btn-bg: #4caf50;
+      --btn-hover-bg: #388e3c;
+    }
+    #darkModeToggle {
+      position: fixed;
+      bottom: 90px;
+      right: 10px;
+      background-color: var(--color-primary);
+      border: none;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: background-color 0.3s;
+      z-index: 20;
+    }
+    #darkModeToggle:hover {
+      background-color: var(--color-primary-dark);
+    }
+    @media (max-width: 480px) {
+      main {
+        margin: 2rem 1rem 6rem;
+      }
+      nav a {
+        font-size: 1.1rem;
+      }
+      nav a span {
+        font-size: 0.7rem;
+      }
+      button.login-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      #darkModeToggle {
+        bottom: 60px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      .profile-container {
+        gap: 8px;
+      }
+      .profile-pic {
+        width: 50px;
+        height: 50px;
+      }
+      .profile-name {
+        font-size: 1rem;
+      }
+      .profile-role {
+        font-size: 0.75rem;
+      }
+      .logo-container img {
+        height: 40px;
+      }
+    }
+.more-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--color-nav-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.more-btn.active {
+  color: var(--color-nav-active);
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+  transform: scale(1.1);
+}
+
+.more-btn span {
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.more-dropdown {
+  display: none;
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  background-color: var(--color-nav-bg);
+  border-radius: 12px;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: dropdownFade 0.25s ease-in-out;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.more-dropdown a {
+  padding: 0.75rem 1.2rem;
+  text-align: right;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 1rem;
+  display: block;
+  transition: background-color 0.2s, padding-left 0.2s;
+}
+
+.more-dropdown a:hover {
+  background-color: var(--color-hover-bg);
+  padding-left: 1.5rem;
+  color: var(--color-primary);
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

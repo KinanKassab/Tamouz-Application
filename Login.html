@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تسجيل الدخول - فوج الكشافة الأول</title>
+  <style>
+    body {
+      background: #e0f2f1;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0; padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      direction: rtl;
+      color: #004d40;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+    }
+
+    label {
+      display: block;
+      text-align: right;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      margin-bottom: 1.2rem;
+      border: 2px solid #004d40;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      outline: none;
+      border-color: #26a69a;
+    }
+
+    .btn-login {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      padding: 1rem 0;
+      width: 100%;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-weight: 700;
+    }
+
+    .btn-login:hover {
+      background-color: #004d40;
+    }
+
+    .error-msg {
+      color: #d32f2f;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <h2>تسجيل الدخول</h2>
+    <div id="error" class="error-msg">خطأ: اسم المستخدم أو كلمة المرور غير صحيحة!</div>
+    <form id="loginForm">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" name="username" required autocomplete="username" />
+
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" />
+
+      <button type="submit" class="btn-login">دخول</button>
+    </form>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorMsg = document.getElementById('error');
+
+    // مثال بسيط للتحقق من بيانات تسجيل دخول ثابتة
+    const validUser = {
+      username: 'kassab',
+      password: '123456'
+    };
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const enteredUser = loginForm.username.value.trim();
+      const enteredPass = loginForm.password.value;
+
+      if (enteredUser === validUser.username && enteredPass === validUser.password) {
+        errorMsg.style.display = 'none';
+        alert('تم تسجيل الدخول بنجاح! 👏');
+        // هنا تقدر تحول المستخدم لصفحة تانية
+        // window.location.href = 'home.html';
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
+
+</body>
+</html>
