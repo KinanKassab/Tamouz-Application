@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { createIcons, icons } from 'lucide';
+import { CreativeCommons as createIcons, Mic as icons } from 'lucide';
 import './styles/main.css';
 
 // Supabase configuration
