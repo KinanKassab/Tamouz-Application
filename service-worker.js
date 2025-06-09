@@ -1,107 +1,84 @@
-const CACHE_NAME = 'tamouz-scouts-v2.1';
-const STATIC_CACHE = 'tamouz-static-v2.1';
-const DYNAMIC_CACHE = 'tamouz-dynamic-v2.1';
-const IMAGE_CACHE = 'tamouz-images-v2.1';
+const CACHE_NAME = 'tamouz-scouts-v2.0.0';
+const STATIC_CACHE = 'tamouz-static-v2.0.0';
+const DYNAMIC_CACHE = 'tamouz-dynamic-v2.0.0';
 
-// الملفات الأساسية للتخزين المؤقت
+// Static assets to cache
 const STATIC_ASSETS = [
   '/',
-  '/Main.html',
-  '/Main.css',
-  '/Main.js',
+  '/index.html',
+  '/src/main.js',
+  '/src/styles/main.css',
   '/manifest.json',
-  '/offline.html',
-  '/pages/home.html',
-  '/pages/schedule.html',
-  '/pages/guide.html',
-  '/pages/songs.html',
-  '/pages/info.html',
-  '/pages/settings.html',
   '/Logo.png',
-  '/images/Profiles/Kinan.jpg'
+  '/images/default-avatar.png'
 ];
 
-// الملفات الديناميكية
-const DYNAMIC_ASSETS = [
-  '/api/',
-  '/data/'
-];
-
-// تثبيت Service Worker
+// Install event
 self.addEventListener('install', (event) => {
-  console.log('🔧 تثبيت Service Worker...');
+  console.log('Service Worker installing...');
   
   event.waitUntil(
-    Promise.all([
-      // تخزين الملفات الثابتة
-      caches.open(STATIC_CACHE).then((cache) => {
-        console.log('📦 تخزين الملفات الثابتة...');
+    caches.open(STATIC_CACHE)
+      .then((cache) => {
+        console.log('Caching static assets...');
         return cache.addAll(STATIC_ASSETS);
-      }),
-      // إجبار التفعيل الفوري
-      self.skipWaiting()
-    ])
+      })
+      .then(() => self.skipWaiting())
   );
 });
 
-// تفعيل Service Worker
+// Activate event
 self.addEventListener('activate', (event) => {
-  console.log('✅ تفعيل Service Worker...');
+  console.log('Service Worker activating...');
   
   event.waitUntil(
     Promise.all([
-      // حذف الكاش القديم
+      // Clean up old caches
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
-            if (cacheName !== STATIC_CACHE && 
-                cacheName !== DYNAMIC_CACHE && 
-                cacheName !== IMAGE_CACHE) {
-              console.log('🗑️ حذف الكاش القديم:', cacheName);
+            if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
+              console.log('Deleting old cache:', cacheName);
               return caches.delete(cacheName);
             }
           })
         );
       }),
-      // السيطرة على جميع العملاء
+      // Take control of all clients
       self.clients.claim()
     ])
   );
 });
 
-// التعامل مع طلبات الشبكة
+// Fetch event
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // تجاهل الطلبات الخارجية
+  // Skip non-GET requests
+  if (request.method !== 'GET') {
+    return;
+  }
+
+  // Skip external requests
   if (url.origin !== location.origin) {
     return;
   }
 
-  // استراتيجية Cache First للملفات الثابتة
+  // Handle different types of requests
   if (STATIC_ASSETS.some(asset => url.pathname.includes(asset))) {
+    // Cache first for static assets
     event.respondWith(cacheFirst(request));
-    return;
-  }
-
-  // استراتيجية Network First للصور
-  if (request.destination === 'image') {
-    event.respondWith(networkFirstImages(request));
-    return;
-  }
-
-  // استراتيجية Network First للبيانات الديناميكية
-  if (DYNAMIC_ASSETS.some(asset => url.pathname.includes(asset))) {
+  } else if (url.pathname.startsWith('/api/')) {
+    // Network first for API calls
     event.respondWith(networkFirst(request));
-    return;
+  } else {
+    // Stale while revalidate for other requests
+    event.respondWith(staleWhileRevalidate(request));
   }
-
-  // استراتيجية Stale While Revalidate للباقي
-  event.respondWith(staleWhileRevalidate(request));
 });
 
-// استراتيجية Cache First
+// Cache first strategy
 async function cacheFirst(request) {
   try {
     const cachedResponse = await caches.match(request);
@@ -116,34 +93,12 @@ async function cacheFirst(request) {
     }
     return networkResponse;
   } catch (error) {
-    console.error('خطأ في Cache First:', error);
-    return await caches.match('/offline.html');
+    console.error('Cache first error:', error);
+    return new Response('Offline', { status: 503 });
   }
 }
 
-// استراتيجية Network First للصور
-async function networkFirstImages(request) {
-  try {
-    const networkResponse = await fetch(request);
-    if (networkResponse.ok) {
-      const cache = await caches.open(IMAGE_CACHE);
-      cache.put(request, networkResponse.clone());
-    }
-    return networkResponse;
-  } catch (error) {
-    const cachedResponse = await caches.match(request);
-    if (cachedResponse) {
-      return cachedResponse;
-    }
-    // إرجاع صورة افتراضية
-    return new Response(
-      '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="#e0e0e0"/><text x="100" y="100" text-anchor="middle" dy=".3em" fill="#999">صورة غير متاحة</text></svg>',
-      { headers: { 'Content-Type': 'image/svg+xml' } }
-    );
-  }
-}
-
-// استراتيجية Network First
+// Network first strategy
 async function networkFirst(request) {
   try {
     const networkResponse = await fetch(request);
@@ -154,11 +109,11 @@ async function networkFirst(request) {
     return networkResponse;
   } catch (error) {
     const cachedResponse = await caches.match(request);
-    return cachedResponse || await caches.match('/offline.html');
+    return cachedResponse || new Response('Offline', { status: 503 });
   }
 }
 
-// استراتيجية Stale While Revalidate
+// Stale while revalidate strategy
 async function staleWhileRevalidate(request) {
   const cache = await caches.open(DYNAMIC_CACHE);
   const cachedResponse = await cache.match(request);
@@ -173,20 +128,16 @@ async function staleWhileRevalidate(request) {
   return cachedResponse || fetchPromise;
 }
 
-// التعامل مع رسائل العميل
+// Handle messages from main thread
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
-  
-  if (event.data && event.data.type === 'GET_VERSION') {
-    event.ports[0].postMessage({ version: CACHE_NAME });
-  }
 });
 
-// إشعارات Push
+// Push notification handling
 self.addEventListener('push', (event) => {
-  console.log('📬 تم استلام إشعار Push');
+  console.log('Push notification received');
   
   const options = {
     body: event.data ? event.data.text() : 'إشعار جديد من كشافة تموز',
@@ -200,7 +151,7 @@ self.addEventListener('push', (event) => {
     actions: [
       {
         action: 'explore',
-        title: 'عرض التفاصيل',
+        title: 'عرض',
         icon: '/images/checkmark.png'
       },
       {
@@ -208,9 +159,7 @@ self.addEventListener('push', (event) => {
         title: 'إغلاق',
         icon: '/images/xmark.png'
       }
-    ],
-    requireInteraction: true,
-    silent: false
+    ]
   };
 
   event.waitUntil(
@@ -218,9 +167,9 @@ self.addEventListener('push', (event) => {
   );
 });
 
-// التعامل مع النقر على الإشعارات
+// Notification click handling
 self.addEventListener('notificationclick', (event) => {
-  console.log('🔔 تم النقر على الإشعار');
+  console.log('Notification clicked');
   
   event.notification.close();
 
@@ -228,18 +177,12 @@ self.addEventListener('notificationclick', (event) => {
     event.waitUntil(
       clients.openWindow('/')
     );
-  } else if (event.action === 'close') {
-    // لا حاجة لفعل شيء
-  } else {
-    event.waitUntil(
-      clients.openWindow('/')
-    );
   }
 });
 
-// مزامنة البيانات في الخلفية
+// Background sync
 self.addEventListener('sync', (event) => {
-  console.log('🔄 مزامنة البيانات في الخلفية');
+  console.log('Background sync triggered');
   
   if (event.tag === 'background-sync') {
     event.waitUntil(doBackgroundSync());
@@ -248,43 +191,10 @@ self.addEventListener('sync', (event) => {
 
 async function doBackgroundSync() {
   try {
-    // مزامنة بيانات الحضور
-    const attendanceData = await getStoredAttendanceData();
-    if (attendanceData.length > 0) {
-      await syncAttendanceData(attendanceData);
-    }
-
-    // مزامنة البيانات الأخرى
-    console.log('✅ تمت المزامنة بنجاح');
+    // Sync offline data when connection is restored
+    console.log('Performing background sync...');
+    // Implementation would go here
   } catch (error) {
-    console.error('❌ فشل في المزامنة:', error);
+    console.error('Background sync failed:', error);
   }
-}
-
-async function getStoredAttendanceData() {
-  // استرجاع بيانات الحضور المحفوظة محلياً
-  return [];
-}
-
-async function syncAttendanceData(data) {
-  // مزامنة بيانات الحضور مع الخادم
-  console.log('مزامنة بيانات الحضور:', data);
-}
-
-// تنظيف الكاش القديم
-self.addEventListener('periodicsync', (event) => {
-  if (event.tag === 'cache-cleanup') {
-    event.waitUntil(cleanupOldCache());
-  }
-});
-
-async function cleanupOldCache() {
-  const cacheNames = await caches.keys();
-  const oldCaches = cacheNames.filter(name => 
-    name.startsWith('tamouz-') && name !== STATIC_CACHE && 
-    name !== DYNAMIC_CACHE && name !== IMAGE_CACHE
-  );
-  
-  await Promise.all(oldCaches.map(name => caches.delete(name)));
-  console.log('🧹 تم تنظيف الكاش القديم');
 }

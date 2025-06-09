@@ -2,14 +2,15 @@
   "name": "كشافة تموز - تطبيق الفوج الأول",
   "short_name": "كشافة تموز",
   "description": "تطبيق شامل لإدارة أنشطة الكشافة والتواصل مع أعضاء الفوج",
+  "version": "2.0.0",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#004d40",
+  "background_color": "#fafafa",
   "theme_color": "#00796b",
   "lang": "ar",
   "dir": "rtl",
-  "categories": ["education", "lifestyle", "social"],
+  "categories": ["education", "lifestyle", "social", "productivity"],
   "screenshots": [
     {
       "src": "/images/screenshot-mobile.png",
@@ -81,7 +82,7 @@
       "name": "تسجيل الحضور",
       "short_name": "حضور",
       "description": "تسجيل الحضور السريع",
-      "url": "/attendance",
+      "url": "/?action=attendance",
       "icons": [
         {
           "src": "/images/shortcut-attendance.png",
@@ -93,7 +94,7 @@
       "name": "الأنشطة",
       "short_name": "أنشطة", 
       "description": "عرض جدول الأنشطة",
-      "url": "/schedule",
+      "url": "/?page=activities",
       "icons": [
         {
           "src": "/images/shortcut-schedule.png",
@@ -102,10 +103,10 @@
       ]
     },
     {
-      "name": "دليل الكشاف",
-      "short_name": "دليل",
+      "name": "المهارات",
+      "short_name": "مهارات",
       "description": "دليل المهارات الكشفية",
-      "url": "/guide", 
+      "url": "/?page=skills", 
       "icons": [
         {
           "src": "/images/shortcut-guide.png",
