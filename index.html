@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>كشافة تموز - تطبيق الفوج الأول</title>
   
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="تطبيق شامل لإدارة أنشطة الكشافة والتواصل مع أعضاء الفوج الأول" />
+  <meta name="keywords" content="كشافة, تموز, فوج, أنشطة, مهارات, مجتمع" />
+  <meta name="author" content="Kinan Kassab" />
+  
   <!-- PWA Meta Tags -->
-  <meta name="description" content="تطبيق شامل لإدارة أنشطة الكشافة والتواصل مع أعضاء الفوج" />
   <meta name="theme-color" content="#00796b" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -18,16 +22,14 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/images/icon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
   
-  <!-- Manifest -->
-  <link rel="manifest" href="/manifest.json" />
-  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- Styles -->
-  <link rel="stylesheet" href="/src/styles/main.css" />
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="/src/styles/main.css" as="style">
+  <link rel="preload" href="/src/main.ts" as="script">
 </head>
 <body>
   <div id="app">
@@ -35,7 +37,7 @@
     <div id="loading-screen" class="loading-screen">
       <div class="loading-content">
         <div class="scout-logo">
-          <img src="/images/logo.png" alt="شعار كشافة تموز" />
+          <img src="/Logo.png" alt="شعار كشافة تموز" />
         </div>
         <div class="loading-spinner"></div>
         <h2>كشافة تموز</h2>
@@ -43,130 +45,21 @@
       </div>
     </div>
 
-    <!-- Auth Container -->
-    <div id="auth-container" class="auth-container" style="display: none;">
-      <!-- Login/Register forms will be injected here -->
-    </div>
-
     <!-- Main App Container -->
     <div id="main-app" class="main-app" style="display: none;">
-      <!-- Header -->
-      <header class="app-header">
-        <div class="header-content">
-          <div class="user-profile">
-            <div class="profile-avatar" id="userAvatar">
-              <img src="/images/default-avatar.png" alt="صورة المستخدم" />
-            </div>
-            <div class="profile-info">
-              <h3 id="userName">مرحباً</h3>
-              <span id="userRole" class="user-role">عضو</span>
-            </div>
-          </div>
-          
-          <div class="header-actions">
-            <button class="notification-btn" id="notificationBtn">
-              <i data-lucide="bell"></i>
-              <span class="notification-badge">3</span>
-            </button>
-            <button class="menu-btn" id="menuBtn">
-              <i data-lucide="menu"></i>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Main Content -->
-      <main class="main-content" id="mainContent">
-        <!-- Content will be dynamically loaded here -->
-      </main>
-
-      <!-- Bottom Navigation -->
-      <nav class="bottom-nav">
-        <a href="#home" class="nav-item active" data-page="home">
-          <i data-lucide="home"></i>
-          <span>الرئيسية</span>
-        </a>
-        <a href="#activities" class="nav-item" data-page="activities">
-          <i data-lucide="calendar"></i>
-          <span>الأنشطة</span>
-        </a>
-        <a href="#skills" class="nav-item" data-page="skills">
-          <i data-lucide="compass"></i>
-          <span>المهارات</span>
-        </a>
-        <a href="#community" class="nav-item" data-page="community">
-          <i data-lucide="users"></i>
-          <span>المجتمع</span>
-        </a>
-        <a href="#profile" class="nav-item" data-page="profile">
-          <i data-lucide="user"></i>
-          <span>الملف</span>
-        </a>
-      </nav>
+      <!-- Dynamic content will be injected here -->
     </div>
 
-    <!-- Notifications Panel -->
-    <div id="notifications-panel" class="notifications-panel">
-      <div class="panel-header">
-        <h3>الإشعارات</h3>
-        <button class="close-panel" id="closeNotifications">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-      <div class="notifications-list" id="notificationsList">
-        <!-- Notifications will be loaded here -->
-      </div>
-    </div>
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
 
-    <!-- Side Menu -->
-    <div id="side-menu" class="side-menu">
-      <div class="menu-header">
-        <div class="menu-user-info">
-          <div class="menu-avatar">
-            <img src="/images/default-avatar.png" alt="صورة المستخدم" />
-          </div>
-          <div class="menu-user-details">
-            <h4 id="menuUserName">اسم المستخدم</h4>
-            <p id="menuUserEmail">user@example.com</p>
-          </div>
-        </div>
-        <button class="close-menu" id="closeMenu">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-      
-      <div class="menu-content">
-        <div class="menu-section">
-          <h5>التطبيق</h5>
-          <a href="#settings" class="menu-item">
-            <i data-lucide="settings"></i>
-            <span>الإعدادات</span>
-          </a>
-          <a href="#help" class="menu-item">
-            <i data-lucide="help-circle"></i>
-            <span>المساعدة</span>
-          </a>
-          <a href="#about" class="menu-item">
-            <i data-lucide="info"></i>
-            <span>حول التطبيق</span>
-          </a>
-        </div>
-        
-        <div class="menu-section">
-          <h5>الحساب</h5>
-          <button class="menu-item logout-btn" id="logoutBtn">
-            <i data-lucide="log-out"></i>
-            <span>تسجيل الخروج</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-container"></div>
 
     <!-- Overlay -->
     <div id="overlay" class="overlay"></div>
   </div>
 
-  <!-- Scripts -->
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.ts"></script>
 </body>
 </html>
