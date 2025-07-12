@@ -10,7 +10,8 @@ const DEMO_USERS = {
         bio: 'Dedicated to leading our scout troop and fostering growth in young minds.',
         joinedEvents: [],
         joinDate: '2020-01-10',
-        phone: '+1 (555) 123-4567'
+        phone: '+1 (555) 123-4567',
+        troop: 'Troop 101'
     },
     'leader@scouts.org': {
         id: '2',
@@ -22,7 +23,8 @@ const DEMO_USERS = {
         bio: 'Passionate about guiding scouts on their journey of discovery and adventure.',
         joinedEvents: [],
         joinDate: '2021-03-15',
-        phone: '+1 (555) 234-5678'
+        phone: '+1 (555) 234-5678',
+        troop: 'Troop 101'
     },
     'scout@scouts.org': {
         id: '3',
@@ -34,7 +36,8 @@ const DEMO_USERS = {
         bio: 'Excited to learn new skills and make lasting friendships through scouting.',
         joinedEvents: [],
         joinDate: '2022-09-20',
-        phone: '+1 (555) 345-6789'
+        phone: '+1 (555) 345-6789',
+        troop: 'Troop 101'
     },
     'guest@scouts.org': {
         id: '4',
@@ -46,7 +49,8 @@ const DEMO_USERS = {
         bio: 'Interested in learning about scouting activities.',
         joinedEvents: [],
         joinDate: '2023-06-01',
-        phone: '+1 (555) 999-0000'
+        phone: '+1 (555) 999-0000',
+        troop: 'Visitor'
     }
 };
 
@@ -62,7 +66,8 @@ const DEMO_EVENTS = [
         maxAttendees: 25,
         category: 'Outdoor',
         image: 'https://images.pexels.com/photos/1061640/pexels-photo-1061640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        status: 'upcoming'
+        status: 'upcoming',
+        troop: 'Troop 101'
     },
     {
         id: 2,
@@ -75,7 +80,8 @@ const DEMO_EVENTS = [
         maxAttendees: 20,
         category: 'Service',
         image: 'https://images.pexels.com/photos/2885320/pexels-photo-2885320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        status: 'upcoming'
+        status: 'upcoming',
+        troop: 'Troop 101'
     },
     {
         id: 3,
@@ -88,7 +94,8 @@ const DEMO_EVENTS = [
         maxAttendees: 15,
         category: 'Education',
         image: 'https://images.pexels.com/photos/1170979/pexels-photo-1170979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        status: 'upcoming'
+        status: 'upcoming',
+        troop: 'Troop 101'
     },
     {
         id: 4,
@@ -101,7 +108,8 @@ const DEMO_EVENTS = [
         maxAttendees: 50,
         category: 'Competition',
         image: 'https://images.pexels.com/photos/163403/box-sport-men-training-163403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        status: 'past'
+        status: 'past',
+        troop: 'Troop 101'
     }
 ];
 
@@ -109,8 +117,8 @@ const DEMO_EVENTS = [
 const ROLE_PERMISSIONS = {
     guest: ['events'],
     member: ['dashboard', 'events', 'profile'],
-    leader: ['dashboard', 'events', 'profile', 'settings'],
-    admin: ['dashboard', 'events', 'profile', 'settings']
+    leader: ['dashboard', 'events', 'information', 'profile', 'settings'],
+    admin: ['dashboard', 'events', 'information', 'profile', 'settings']
 };
 
 // Event permissions by role

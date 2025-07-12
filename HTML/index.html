@@ -34,9 +34,10 @@
         <div class="login-container">
             <div class="login-header">
                 <div class="logo">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polygon points="10,8 16,12 10,16 10,8"></polygon>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
                     </svg>
                 </div>
                 <h1>ScoutPluse</h1>
@@ -119,13 +120,27 @@
                 </svg>
             </button>
             <div class="mobile-logo">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polygon points="10,8 16,12 10,16 10,8"></polygon>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
                 </svg>
                 <span>ScoutPluse</span>
             </div>
             <div class="mobile-user">
+                <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
                 <div class="user-avatar" id="mobileUserAvatar">A</div>
             </div>
         </header>
@@ -134,9 +149,10 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-logo">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <polygon points="10,8 16,12 10,16 10,8"></polygon>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
                     </svg>
                     <span>ScoutPluse</span>
                 </div>
@@ -170,6 +186,16 @@
                                 <line x1="3" y1="10" x2="21" y2="10"></line>
                             </svg>
                             <span data-translate="nav.events">Events</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#information" class="nav-link" data-page="information">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span data-translate="nav.information">Information</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -225,9 +251,50 @@
                 
                 <div class="dashboard-content">
                     <div class="dashboard-section">
-                        <h2 data-translate="dashboard.recent_events">Recent Events</h2>
+                        <h2>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span data-translate="dashboard.recent_events">Recent Events</span>
+                        </h2>
                         <div id="recentEvents" class="recent-events">
                             <!-- Events will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-sidebar">
+                        <div class="dashboard-section">
+                            <h2>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"></polyline>
+                                </svg>
+                                Quick Actions
+                            </h2>
+                            <div id="quickActions" class="quick-actions">
+                                <!-- Quick actions will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-section">
+                            <div id="troopOverview" class="troop-overview">
+                                <!-- Troop overview will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-section">
+                            <h2>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12,6 12,12 16,14"></polyline>
+                                </svg>
+                                Upcoming Deadlines
+                            </h2>
+                            <div id="upcomingDeadlines" class="upcoming-deadlines">
+                                <!-- Deadlines will be loaded here -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,21 +320,22 @@
                         </button>
                     </div>
                 </div>
-                
-                <div class="tabs">
-                    <button class="tab active" data-tab="upcoming">
-                        <span data-translate="events.upcoming">Upcoming</span>
-                    </button>
-                    <button class="tab" data-tab="past">
-                        <span data-translate="events.past">Past</span>
-                    </button>
-                </div>
-                
                 <div id="eventsGrid" class="events-grid">
                     <!-- Events will be loaded here -->
                 </div>
             </div>
 
+            <!-- Information Page -->
+            <div id="informationPage" class="page">
+                <div class="page-header">
+                    <h1 data-translate="information.title">Information</h1>
+                    <p data-translate="information.subtitle">Scouting knowledge and resources</p>
+                </div>
+                
+                <div id="informationContent" class="information-content">
+                    <!-- Information content will be loaded here -->
+                </div>
+            </div>
 
             <!-- Profile Page -->
             <div id="profilePage" class="page">
@@ -316,6 +384,14 @@
             </a>
             <a href="#profile" class="bottom-nav-item" data-page="profile">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span data-translate="nav.information">Information</span>
+            </a>
+            <a href="#profile" class="bottom-nav-item" data-page="profile">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
@@ -342,6 +418,13 @@
         </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18,15 12,9 6,15"></polyline>
+        </svg>
+    </button>
+
     <!-- Scripts -->
     <script src="../JS/data.js"></script>
     <script src="../JS/translations.js"></script>
@@ -350,8 +433,7 @@
     <script src="../JS/navigation.js"></script>
     <script src="../JS/dashboard.js"></script>
     <script src="../JS/events.js"></script>
-    <script src="../JS/badges.js"></script>
-    <script src="../JS/members.js"></script>
+    <script src="../JS/information.js"></script>
     <script src="../JS/profile.js"></script>
     <script src="../JS/settings.js"></script>
     <script src="../JS/main.js"></script>

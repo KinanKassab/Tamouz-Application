@@ -228,6 +228,79 @@ class ScoutPluseApp {
     setupTheme() {
         // Theme is already initialized in the HTML head
         // Additional theme setup can be added here if needed
+        this.setupThemeToggle();
+    }
+
+    setupThemeToggle() {
+        const themeToggle = document.getElementById('mobileThemeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const themeService = window.getThemeService?.();
+                if (themeService) {
+                    const newTheme = themeService.toggleTheme();
+                    this.updateThemeIcon(newTheme);
+                }
+            });
+            
+            // Set initial icon
+            const themeService = window.getThemeService?.();
+            if (themeService) {
+                this.updateThemeIcon(themeService.getTheme());
+            }
+        }
+        
+        // Setup scroll to top button
+        this.setupScrollToTop();
+    }
+
+    updateThemeIcon(theme) {
+        const themeToggle = document.getElementById('mobileThemeToggle');
+        if (!themeToggle) return;
+        
+        const isDark = document.documentElement.classList.contains('dark');
+        const icon = themeToggle.querySelector('svg');
+        
+        if (isDark) {
+            // Moon icon for dark mode
+            icon.innerHTML = `
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            `;
+        } else {
+            // Sun icon for light mode
+            icon.innerHTML = `
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            `;
+        }
+    }
+
+    setupScrollToTop() {
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        if (!scrollToTopBtn) return;
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        // Scroll to top when clicked
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 
     setupTranslations() {
@@ -256,11 +329,6 @@ class ScoutPluseApp {
             case 'information':
                 if (window.informationService) {
                     window.informationService.refresh();
-                }
-                break;
-            case 'members':
-                if (window.membersService) {
-                    window.membersService.refresh();
                 }
                 break;
             case 'profile':

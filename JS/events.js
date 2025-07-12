@@ -1,7 +1,6 @@
 // Events Management
 class EventsService {
     constructor() {
-        this.currentTab = 'upcoming';
         this.events = [...DEMO_EVENTS]; // Create a copy to allow modifications
         this.currentUser = null;
         this.init();
@@ -14,15 +13,6 @@ class EventsService {
     }
 
     setupEventListeners() {
-        // Tab switching
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const tabName = tab.dataset.tab;
-                this.switchTab(tabName);
-            });
-        });
-
         // Create event button - only show for leaders and admins
         const createEventBtn = document.getElementById('createEventBtn');
         if (createEventBtn) {
@@ -43,26 +33,12 @@ class EventsService {
         return this.currentUser && ['member', 'leader', 'admin'].includes(this.currentUser.role);
     }
 
-    switchTab(tabName) {
-        this.currentTab = tabName;
-        
-        // Update tab appearance
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.tab === tabName);
-        });
-
-        // Load events for the selected tab
-        this.loadEvents();
-    }
-
     loadEvents() {
         const eventsGrid = document.getElementById('eventsGrid');
         if (!eventsGrid) return;
 
-        const filteredEvents = this.events.filter(event => 
-            this.currentTab === 'upcoming' ? event.status === 'upcoming' : event.status === 'past'
-        );
+        // Filter events by user's troop and show all events
+        const filteredEvents = this.events.filter(event => event.troop === this.currentUser.troop);
 
         if (filteredEvents.length === 0) {
             eventsGrid.innerHTML = this.getEmptyStateHTML();
@@ -105,9 +81,7 @@ class EventsService {
     }
 
     getFilteredEvents() {
-        return this.events.filter(event => 
-            this.currentTab === 'upcoming' ? event.status === 'upcoming' : event.status === 'past'
-        );
+        return this.events.filter(event => event.troop === this.currentUser.troop);
     }
 
     getEventCardHTML(event) {
@@ -219,10 +193,8 @@ class EventsService {
     }
 
     getEmptyStateHTML() {
-        const title = this.currentTab === 'upcoming' ? 'No upcoming events' : 'No past events';
-        const description = this.currentTab === 'upcoming' 
-            ? 'Check back later for new events!' 
-            : 'No past events to display.';
+        const title = 'No events found';
+        const description = 'No events available for your troop yet.';
 
         return `
             <div class="empty-state">
@@ -495,6 +467,9 @@ class EventsService {
         // Add event to the events array
         this.events.unshift(eventData);
         
+        // Set troop for the event
+        eventData.troop = this.currentUser.troop;
+        
         // Show success message
         this.showNotification(`Event "${eventData.title}" created successfully!`, 'success');
         
@@ -534,10 +509,6 @@ class EventsService {
         this.currentUser = AuthService.getCurrentUser();
         this.setupEventListeners();
         this.loadEvents();
-    }
-
-    getCurrentTab() {
-        return this.currentTab;
     }
 
     getEvents() {
