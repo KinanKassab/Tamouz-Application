@@ -46,7 +46,7 @@ class AuthService {
         
         try {
             // Attempt to load from JSON file
-            const response = await fetch('/JS/users.json');
+            const response = await fetch('users.json');
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}: ${response.statusText}`);
