@@ -135,6 +135,8 @@ class DashboardService {
 
 // Add CSS for dashboard-specific styles
 const dashboardStyles = `
+    }
+}
 <style>
 .recent-events {
     display: grid;
