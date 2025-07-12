@@ -83,11 +83,6 @@ class ProfileService {
                         <input type="text" id="joinDate" value="${joinDate}" readonly>
                     </div>
                     
-                    <div class="profile-field">
-                        <label for="bio">Bio</label>
-                        <textarea id="bio" rows="4" placeholder="Tell us about yourself...">${this.getDefaultBio()}</textarea>
-                    </div>
-                    
                     <div style="display: flex; gap: 12px; justify-content: flex-end;">
                         <button type="button" class="btn btn-outline" id="cancelBtn">Cancel</button>
                         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -95,25 +90,6 @@ class ProfileService {
                 </form>
             </div>
 
-
-            <div class="profile-card">
-                <h3>Account Settings</h3>
-                <div class="settings-list">
-                    <div class="settings-item">
-                        <div class="settings-item-info">
-                            <h4>Profile Visibility</h4>
-                            <p>Allow other members to view your profile</p>
-                        </div>
-                        <div class="toggle-switch active" id="profileVisibility"></div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-color);">
-                    <button class="btn btn-outline" style="color: var(--red-600); border-color: var(--red-600);" onclick="window.profileService.changePassword()">
-                        Change Password
-                    </button>
-                </div>
-            </div>
         `;
     }
 

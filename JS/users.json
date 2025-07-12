@@ -6,7 +6,8 @@
       "email": "leader@scouts.org",
       "password": "Bashar",
       "role": "leader",
-      "troop": "Ramita"
+      "troop": "Ramita",
+      "phone": "+1 (555) 234-5678"
     },
     {
       "id": "1",
@@ -14,7 +15,8 @@
       "email": "admin@scouts.org",
       "password": "admin",
       "role": "admin",
-      "troop": "Development"
+      "troop": "Development",
+      "phone": "+1 (555) 123-4567"
     },
     {
       "id": "3",
@@ -23,7 +25,8 @@
       "password": "scout123",
       "role": "member",
       "troop": "Troop 101",
-      "badges": ["Camping", "Hiking", "First Aid"]
+      "badges": ["Camping", "Hiking", "First Aid"],
+      "phone": "+1 (555) 345-6789"
     },
     {
       "id": "4",
@@ -32,7 +35,8 @@
       "password": "alex123",
       "role": "member",
       "troop": "Troop 101",
-      "badges": ["Camping", "First Aid"]
+      "badges": ["Camping", "First Aid"],
+      "phone": "+1 (555) 456-7890"
     },
     {
       "id": "5",
@@ -41,7 +45,8 @@
       "password": "sarah123",
       "role": "member",
       "troop": "Troop 101",
-      "badges": ["Leadership", "Camping", "Hiking", "First Aid"]
+      "badges": ["Leadership", "Camping", "Hiking", "First Aid"],
+      "phone": "+1 (555) 567-8901"
     }
   ]
 }

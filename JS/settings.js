@@ -80,54 +80,6 @@ class SettingsService {
             </div>
 
 
-            <div class="settings-section">
-                <h3>Privacy</h3>
-                <div class="settings-item">
-                    <div class="settings-item-info">
-                        <h4>Profile Visibility</h4>
-                        <p>Allow other members to view your profile</p>
-                    </div>
-                    <div class="toggle-switch ${this.settings.privacy.profileVisible ? 'active' : ''}" data-setting="privacy.profileVisible"></div>
-                </div>
-            </div>
-
-            <div class="settings-section">
-                <h3>Preferences</h3>
-                <div class="settings-item">
-                    <div class="settings-item-info">
-                        <h4>Auto-join Events</h4>
-                        <p>Automatically join events you're eligible for</p>
-                    </div>
-                    <div class="toggle-switch ${this.settings.preferences.autoJoinEvents ? 'active' : ''}" data-setting="preferences.autoJoinEvents"></div>
-                </div>
-                
-                <div class="settings-item">
-                    <div class="settings-item-info">
-                        <h4>Email Digest</h4>
-                        <p>How often to receive email summaries</p>
-                    </div>
-                    <select id="emailDigestSelect" class="settings-select">
-                        <option value="daily" ${this.settings.preferences.emailDigest === 'daily' ? 'selected' : ''}>Daily</option>
-                        <option value="weekly" ${this.settings.preferences.emailDigest === 'weekly' ? 'selected' : ''}>Weekly</option>
-                        <option value="monthly" ${this.settings.preferences.emailDigest === 'monthly' ? 'selected' : ''}>Monthly</option>
-                        <option value="never" ${this.settings.preferences.emailDigest === 'never' ? 'selected' : ''}>Never</option>
-                    </select>
-                </div>
-                
-                <div class="settings-item">
-                    <div class="settings-item-info">
-                        <h4>Timezone</h4>
-                        <p>Your local timezone for event scheduling</p>
-                    </div>
-                    <select id="timezoneSelect" class="settings-select">
-                        <option value="America/New_York" ${this.settings.preferences.timezone === 'America/New_York' ? 'selected' : ''}>Eastern Time</option>
-                        <option value="America/Chicago" ${this.settings.preferences.timezone === 'America/Chicago' ? 'selected' : ''}>Central Time</option>
-                        <option value="America/Denver" ${this.settings.preferences.timezone === 'America/Denver' ? 'selected' : ''}>Mountain Time</option>
-                        <option value="America/Los_Angeles" ${this.settings.preferences.timezone === 'America/Los_Angeles' ? 'selected' : ''}>Pacific Time</option>
-                    </select>
-                </div>
-            </div>
-
             ${this.currentUser.role === 'admin' ? this.getAdminSettingsHTML() : ''}
 
             <div class="settings-section">

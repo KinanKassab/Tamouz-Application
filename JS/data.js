@@ -100,9 +100,9 @@ const DEMO_EVENTS = [
 // Navigation permissions by role - removed information section
 const ROLE_PERMISSIONS = {
     guest: ['events'],
-    member: ['dashboard', 'events', 'members', 'profile'],
-    leader: ['dashboard', 'events', 'members', 'profile', 'settings'],
-    admin: ['dashboard', 'events', 'members', 'profile', 'settings']
+    member: ['dashboard', 'events', 'profile'],
+    leader: ['dashboard', 'events', 'profile', 'settings'],
+    admin: ['dashboard', 'events', 'profile', 'settings']
 };
 
 // Event permissions by role
