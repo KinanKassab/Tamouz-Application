@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Bashar",
+      "email": "leader@scouts.org",
+      "password": "Bashar",
+      "role": "leader",
+      "troop": "Ramita"
+    },
+    {
+      "id": "1",
+      "name": "admin",
+      "email": "admin@scouts.org",
+      "password": "admin",
+      "role": "admin",
+      "troop": "Development"
+    },
+    {
+      "id": "3",
+      "name": "Scout Member",
+      "email": "scout@scouts.org",
+      "password": "scout123",
+      "role": "member",
+      "troop": "Troop 101",
+      "badges": ["Camping", "Hiking", "First Aid"]
+    },
+    {
+      "id": "4",
+      "name": "Alex Johnson",
+      "email": "alex@scouts.org",
+      "password": "alex123",
+      "role": "member",
+      "troop": "Troop 101",
+      "badges": ["Camping", "First Aid"]
+    },
+    {
+      "id": "5",
+      "name": "Sarah Wilson",
+      "email": "sarah@scouts.org",
+      "password": "sarah123",
+      "role": "member",
+      "troop": "Troop 101",
+      "badges": ["Leadership", "Camping", "Hiking", "First Aid"]
+    }
+  ]
+}

@@ -1,0 +1,447 @@
+/* Mobile-First Responsive Design */
+
+/* Base styles are mobile-first (already defined in main.css) */
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .events-grid,
+    .information-grid,
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .page-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    :root {
+        --spacing-6: 1.5rem;
+        --spacing-8: 2rem;
+    }
+    
+    .main-content {
+        padding: var(--spacing-6);
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .events-grid,
+    .members-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .information-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .tabs {
+        flex-direction: row;
+    }
+    
+    .profile-header {
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .settings-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+    }
+    
+    .modal-content {
+        max-width: 600px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .events-grid,
+    .members-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .information-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .search-filter-bar {
+        justify-content: space-between;
+    }
+    
+    .search-input {
+        max-width: 400px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .events-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .information-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .dashboard-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: var(--spacing-8);
+    }
+}
+
+/* Desktop-specific styles (1024px and up) */
+@media (min-width: 1024px) {
+    .mobile-header {
+        display: none;
+    }
+    
+    .bottom-nav {
+        display: none;
+    }
+    
+    .main-content {
+        margin-left: var(--sidebar-width);
+        padding-top: var(--spacing-6);
+        padding-bottom: var(--spacing-6);
+    }
+    
+    .sidebar {
+        transform: translateX(0);
+    }
+    
+    .sidebar-close {
+        display: none;
+    }
+    
+    .sidebar-overlay {
+        display: none;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .event-image img,
+    .profile-avatar,
+    .user-avatar {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 600px) {
+    .mobile-header {
+        height: 48px;
+    }
+    
+    .main-content {
+        padding-top: calc(48px + var(--spacing-3));
+    }
+    
+    .sidebar {
+        padding-top: var(--spacing-3);
+    }
+    
+    .sidebar-header {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+    
+    .sidebar-footer {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+}
+
+/* Print styles */
+@media print {
+    .mobile-header,
+    .sidebar,
+    .bottom-nav,
+    .sidebar-overlay,
+    .btn,
+    .action-btn,
+    .modal {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    .page {
+        display: block !important;
+    }
+    
+    .event-card,
+    .member-card,
+    .profile-card,
+    .settings-section {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .events-grid,
+    .members-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --text-muted: #000000;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark {
+        --border-color: #ffffff;
+        --text-muted: #ffffff;
+    }
+    
+    .btn-outline {
+        border-width: 2px;
+    }
+    
+    .nav-link.active {
+        border: 2px solid var(--primary-600);
+    }
+}
+
+/* Focus styles for keyboard navigation */
+@media (prefers-reduced-motion: no-preference) {
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .bottom-nav-item:focus-visible,
+    .action-btn:focus-visible,
+    .tab:focus-visible {
+        outline: 2px solid var(--primary-600);
+        outline-offset: 2px;
+    }
+    
+    .event-card:focus-visible,
+    .member-card:focus-visible {
+        outline: 2px solid var(--primary-600);
+        outline-offset: 2px;
+        transform: translateY(-2px);
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .nav-link,
+    .bottom-nav-item,
+    .action-btn,
+    .tab,
+    .event-card,
+    .member-card {
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    .user-avatar {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .toggle-switch {
+        min-width: 60px;
+        min-height: 36px;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .btn:hover,
+    .nav-link:hover,
+    .bottom-nav-item:hover,
+    .action-btn:hover,
+    .tab:hover,
+    .event-card:hover,
+    .member-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+        background-color: initial;
+    }
+    
+    .event-card:hover .event-image img {
+        transform: none;
+    }
+}
+
+/* Specific mobile device adjustments */
+
+/* iPhone SE and similar small screens */
+@media (max-width: 375px) {
+    .mobile-header {
+        padding: 0 var(--spacing-2);
+    }
+    
+    .main-content {
+        padding: var(--spacing-2);
+        padding-top: calc(var(--mobile-header-height) + var(--spacing-2));
+        padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-2));
+    }
+    
+    .page-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-3);
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-2);
+    }
+    
+    .stat-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .event-content,
+    .member-card,
+    .profile-card,
+    .settings-section {
+        padding: var(--spacing-3);
+    }
+    
+    .modal-content {
+        margin: var(--spacing-1);
+        max-height: calc(100vh - 2 * var(--spacing-1));
+    }
+    
+    .modal-header,
+    .modal-body {
+        padding: var(--spacing-3);
+    }
+    
+    .bottom-nav {
+        padding: var(--spacing-1) var(--spacing-2);
+    }
+    
+    .bottom-nav-item {
+        padding: var(--spacing-1);
+        font-size: 10px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+}
+
+/* Tablet landscape optimizations */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+    .sidebar {
+        width: 240px;
+    }
+    
+    :root {
+        --sidebar-width: 240px;
+    }
+    
+    .sidebar-header {
+        padding: var(--spacing-4);
+    }
+    
+    .sidebar-footer {
+        padding: var(--spacing-4);
+    }
+    
+    .nav-link {
+        padding: var(--spacing-2) var(--spacing-3);
+        font-size: var(--font-size-sm);
+    }
+    
+    .user-info {
+        gap: var(--spacing-2);
+    }
+    
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1440px) {
+    .main-content {
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(var(--sidebar-width) + var(--spacing-8));
+        padding-right: var(--spacing-8);
+    }
+    
+    .events-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .information-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+    .main-content {
+        max-width: 1600px;
+    }
+    
+    .events-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    
+    .members-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .information-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .dashboard-stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
