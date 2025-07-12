@@ -20,7 +20,7 @@ class ProfileService {
 
     getProfileHTML() {
         const initials = this.currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
-        const joinDate = this.formatDate('2022-01-15'); // Default join date
+        const joinDate = this.formatDate(this.currentUser.joinDate || '2022-01-15');
 
         return `
             <div class="profile-card">

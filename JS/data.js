@@ -8,7 +8,9 @@ const DEMO_USERS = {
         role: 'admin',
         troop: 'Troop 101',
         bio: 'Dedicated to leading our scout troop and fostering growth in young minds.',
-        joinedEvents: []
+        joinedEvents: [],
+        joinDate: '2020-01-10',
+        phone: '+1 (555) 123-4567'
     },
     'leader@scouts.org': {
         id: '2',
@@ -18,7 +20,9 @@ const DEMO_USERS = {
         role: 'leader',
         troop: 'Troop 101',
         bio: 'Passionate about guiding scouts on their journey of discovery and adventure.',
-        joinedEvents: []
+        joinedEvents: [],
+        joinDate: '2021-03-15',
+        phone: '+1 (555) 234-5678'
     },
     'scout@scouts.org': {
         id: '3',
@@ -28,7 +32,9 @@ const DEMO_USERS = {
         role: 'member',
         troop: 'Troop 101',
         bio: 'Excited to learn new skills and make lasting friendships through scouting.',
-        joinedEvents: []
+        joinedEvents: [],
+        joinDate: '2022-09-20',
+        phone: '+1 (555) 345-6789'
     },
     'guest@scouts.org': {
         id: '4',
@@ -38,7 +44,9 @@ const DEMO_USERS = {
         role: 'guest',
         troop: 'Visitor',
         bio: 'Interested in learning about scouting activities.',
-        joinedEvents: []
+        joinedEvents: [],
+        joinDate: '2023-06-01',
+        phone: '+1 (555) 999-0000'
     }
 };
 
