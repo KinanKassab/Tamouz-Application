@@ -1,9 +1,53 @@
-/* Event Card Styles */
+/* 
+===========================================
+SCOUTPLUSE - COMPONENTS STYLESHEET
+===========================================
+
+This file contains styles for specific UI components used throughout
+the ScoutPluse application. Each component is self-contained and
+follows consistent design patterns.
+
+Components included:
+1. Event Cards - Display event information in card format
+2. Member Cards - Show member profiles and stats
+3. Information Grid - Educational content display
+4. Category Badges - Content categorization
+5. Action Buttons - Interactive elements
+6. Status Indicators - Visual status representation
+7. Search and Filter Components
+8. Pagination Controls
+9. Breadcrumb Navigation
+10. Tag System
+11. Avatar Groups
+12. Tooltip System
+*/
+
+/* 
+===========================================
+EVENT CARD COMPONENT
+===========================================
+Cards used to display event information with images,
+details, and interactive elements
+*/
+
 .event-card {
-    cursor: pointer;
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: 1px solid var(--border-light);
+    position: relative;
 }
 
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+/* Event image container */
 .event-image {
     position: relative;
     height: 200px;
@@ -14,13 +58,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-normal);
 }
 
 .event-card:hover .event-image img {
     transform: scale(1.05);
 }
 
+/* Event category badge */
 .event-category {
     position: absolute;
     top: var(--spacing-3);
@@ -31,8 +76,10 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
 }
 
+/* Category color variants */
 .category-outdoor {
     background: var(--primary-100);
     color: var(--primary-800);
@@ -53,6 +100,7 @@
     color: var(--red-800);
 }
 
+/* Dark theme category colors */
 .dark .category-outdoor {
     background: var(--primary-900);
     color: var(--primary-300);
@@ -73,6 +121,7 @@
     color: #fca5a5;
 }
 
+/* Event content area */
 .event-content {
     padding: var(--spacing-6);
 }
@@ -96,6 +145,7 @@
     overflow: hidden;
 }
 
+/* Event details list */
 .event-details {
     display: flex;
     flex-direction: column;
@@ -113,8 +163,10 @@
 
 .event-detail svg {
     flex-shrink: 0;
+    color: var(--primary-600);
 }
 
+/* Attendance progress bar */
 .attendance-bar {
     margin-bottom: var(--spacing-4);
 }
@@ -141,22 +193,40 @@
 
 .progress-fill {
     height: 100%;
-    background: var(--primary-500);
+    background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
     border-radius: 3px;
-    transition: width 0.3s ease;
+    transition: width var(--transition-normal);
 }
 
-/* Member Card Styles */
+/* 
+===========================================
+MEMBER CARD COMPONENT
+===========================================
+Cards for displaying member information and statistics
+*/
+
 .member-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
     padding: var(--spacing-6);
     text-align: center;
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-fast);
 }
 
+.member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+/* Member avatar */
 .member-avatar {
     width: 64px;
     height: 64px;
-    background: var(--primary-600);
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
     color: white;
     border-radius: var(--radius-2xl);
     display: flex;
@@ -165,6 +235,7 @@
     font-weight: 700;
     font-size: var(--font-size-xl);
     margin: 0 auto var(--spacing-4);
+    box-shadow: var(--shadow-sm);
 }
 
 .member-name {
@@ -178,8 +249,12 @@
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
     margin-bottom: var(--spacing-4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: var(--font-weight-medium);
 }
 
+/* Member statistics */
 .member-stats {
     display: flex;
     justify-content: space-around;
@@ -207,7 +282,13 @@
     letter-spacing: 0.5px;
 }
 
-/* Information Grid Styles */
+/* 
+===========================================
+INFORMATION GRID COMPONENT
+===========================================
+Grid layout for educational content and resources
+*/
+
 .information-grid {
     min-height: 400px;
     display: flex;
@@ -215,7 +296,21 @@
     justify-content: center;
 }
 
-/* Category Badge Styles */
+/* When grid has content */
+.information-grid.has-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+    min-height: auto;
+}
+
+/* 
+===========================================
+CATEGORY BADGE COMPONENT
+===========================================
+Small badges for categorizing content
+*/
+
 .category-badge {
     display: inline-flex;
     align-items: center;
@@ -226,13 +321,30 @@
     font-size: var(--font-size-xs);
     font-weight: 500;
     color: var(--text-secondary);
+    transition: all var(--transition-fast);
 }
 
 .dark .category-badge {
     background: var(--gray-700);
 }
 
-/* Action Button Styles */
+.category-badge:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.dark .category-badge:hover {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* 
+===========================================
+ACTION BUTTON COMPONENT
+===========================================
+Small action buttons for interactive elements
+*/
+
 .action-btn {
     background: none;
     border: none;
@@ -240,7 +352,7 @@
     cursor: pointer;
     padding: var(--spacing-2);
     border-radius: var(--radius);
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     min-width: 40px;
     min-height: 40px;
     display: flex;
@@ -251,12 +363,14 @@
 .action-btn:hover {
     background-color: var(--gray-100);
     color: var(--text-primary);
+    transform: scale(1.1);
 }
 
 .dark .action-btn:hover {
     background-color: var(--gray-700);
 }
 
+/* Danger variant */
 .action-btn-danger:hover {
     background-color: var(--red-100);
     color: var(--red-600);
@@ -267,7 +381,13 @@
     color: #fca5a5;
 }
 
-/* Status Indicator Styles */
+/* 
+===========================================
+STATUS INDICATOR COMPONENT
+===========================================
+Visual indicators for status information
+*/
+
 .status-indicator {
     display: inline-flex;
     align-items: center;
@@ -285,6 +405,7 @@
     border-radius: 50%;
 }
 
+/* Status variants */
 .status-active {
     background: var(--primary-100);
     color: var(--primary-800);
@@ -303,6 +424,7 @@
     background: var(--gray-600);
 }
 
+/* Dark theme status colors */
 .dark .status-active {
     background: var(--primary-900);
     color: var(--primary-300);
@@ -313,7 +435,13 @@
     color: var(--gray-300);
 }
 
-/* Search and Filter Styles */
+/* 
+===========================================
+SEARCH AND FILTER COMPONENTS
+===========================================
+Search input and filter controls
+*/
+
 .search-filter-bar {
     display: flex;
     gap: var(--spacing-3);
@@ -321,6 +449,7 @@
     flex-wrap: wrap;
 }
 
+/* Search input container */
 .search-input {
     flex: 1;
     min-width: 200px;
@@ -335,12 +464,13 @@
     font-size: var(--font-size-sm);
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    transition: border-color 0.2s ease;
+    transition: border-color var(--transition-fast);
 }
 
 .search-input input:focus {
     outline: none;
     border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .search-input svg {
@@ -352,6 +482,7 @@
     pointer-events: none;
 }
 
+/* Filter dropdown */
 .filter-dropdown {
     position: relative;
 }
@@ -363,9 +494,28 @@
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
     padding-right: 2.5rem;
+    padding: var(--spacing-3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    min-width: 150px;
 }
 
-/* Pagination Styles */
+.filter-dropdown select:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* 
+===========================================
+PAGINATION COMPONENT
+===========================================
+Navigation controls for paginated content
+*/
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -381,17 +531,19 @@
     color: var(--text-primary);
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
     min-width: 40px;
     min-height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: var(--font-size-sm);
 }
 
 .pagination-btn:hover:not(:disabled) {
     background-color: var(--gray-100);
     border-color: var(--gray-300);
+    transform: translateY(-1px);
 }
 
 .dark .pagination-btn:hover:not(:disabled) {
@@ -410,7 +562,13 @@
     cursor: not-allowed;
 }
 
-/* Breadcrumb Styles */
+/* 
+===========================================
+BREADCRUMB COMPONENT
+===========================================
+Navigation breadcrumb trail
+*/
+
 .breadcrumb {
     display: flex;
     align-items: center;
@@ -421,6 +579,12 @@
 
 .breadcrumb-item {
     color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb-item:hover {
+    color: var(--text-primary);
 }
 
 .breadcrumb-item:last-child {
@@ -432,7 +596,13 @@
     color: var(--text-muted);
 }
 
-/* Tag Styles */
+/* 
+===========================================
+TAG COMPONENT
+===========================================
+Small tags for labeling and categorization
+*/
+
 .tag {
     display: inline-flex;
     align-items: center;
@@ -443,12 +613,24 @@
     font-size: var(--font-size-xs);
     font-weight: 500;
     color: var(--text-secondary);
+    transition: all var(--transition-fast);
 }
 
 .dark .tag {
     background: var(--gray-700);
 }
 
+.tag:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.dark .tag:hover {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* Primary tag variant */
 .tag-primary {
     background: var(--primary-100);
     color: var(--primary-800);
@@ -459,7 +641,13 @@
     color: var(--primary-300);
 }
 
-/* Avatar Group Styles */
+/* 
+===========================================
+AVATAR GROUP COMPONENT
+===========================================
+Overlapping avatars for showing multiple users
+*/
+
 .avatar-group {
     display: flex;
     align-items: center;
@@ -496,7 +684,13 @@
     background: var(--gray-700);
 }
 
-/* Tooltip Styles */
+/* 
+===========================================
+TOOLTIP COMPONENT
+===========================================
+Hover tooltips for additional information
+*/
+
 .tooltip {
     position: relative;
     display: inline-block;
@@ -516,8 +710,8 @@
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 1000;
+    transition: all var(--transition-fast);
+    z-index: var(--z-tooltip);
     margin-bottom: var(--spacing-1);
 }
 
@@ -531,7 +725,7 @@
     border-top-color: var(--gray-900);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 .tooltip:hover::after,
@@ -540,7 +734,60 @@
     visibility: visible;
 }
 
-/* Responsive adjustments for components */
+/* 
+===========================================
+TOGGLE SWITCH COMPONENT
+===========================================
+Custom toggle switches for settings
+*/
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background: var(--gray-300);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.toggle-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: var(--radius-full);
+    transition: transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.toggle-switch.active {
+    background: var(--primary-600);
+}
+
+.toggle-switch.active::before {
+    transform: translateX(26px);
+}
+
+.dark .toggle-switch {
+    background: var(--gray-600);
+}
+
+.dark .toggle-switch::before {
+    background: var(--gray-200);
+}
+
+/* 
+===========================================
+RESPONSIVE ADJUSTMENTS
+===========================================
+Mobile-specific component adjustments
+*/
+
 @media (max-width: 768px) {
     .event-image {
         height: 160px;
@@ -595,5 +842,61 @@
     
     .member-stat-value {
         font-size: var(--font-size-lg);
+    }
+    
+    .toggle-switch {
+        width: 44px;
+        height: 22px;
+    }
+    
+    .toggle-switch::before {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .toggle-switch.active::before {
+        transform: translateX(22px);
+    }
+}
+
+/* 
+===========================================
+ACCESSIBILITY ENHANCEMENTS
+===========================================
+Enhanced accessibility for components
+*/
+
+/* Focus styles for interactive components */
+.event-card:focus-visible,
+.member-card:focus-visible,
+.action-btn:focus-visible,
+.pagination-btn:focus-visible,
+.toggle-switch:focus-visible {
+    outline: 2px solid var(--primary-600);
+    outline-offset: 2px;
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+    .event-category,
+    .category-badge,
+    .status-indicator,
+    .tag {
+        border: 1px solid currentColor;
+    }
+    
+    .progress-bar {
+        border: 1px solid var(--text-primary);
+    }
+}
+
+/* Reduced motion adjustments */
+@media (prefers-reduced-motion: reduce) {
+    .event-card:hover .event-image img {
+        transform: none;
+    }
+    
+    .toggle-switch::before {
+        transition: none;
     }
 }
