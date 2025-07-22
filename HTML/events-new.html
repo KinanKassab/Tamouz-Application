@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - ScoutPluse</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/CSS/main.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/events-new.css">
+    
+</head>
+<body>
+    <div class="events-page">
+        <!-- Page Header -->
+        <div class="events-header">
+            <h1>Events</h1>
+            <div class="events-header-actions">
+                <button class="btn btn-primary" id="createEventBtn" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Create Event
+                </button>
+            </div>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="events-controls">
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="eventsSearch" class="search-input" placeholder="Search events by title, description, or location...">
+            </div>
+            
+            <div class="category-filters">
+                <button class="category-filter active" data-category="all">All Events</button>
+                <button class="category-filter" data-category="ramita">Ramita</button>
+                <button class="category-filter" data-category="ma3lola">Ma3lola</button>
+                <button class="category-filter" data-category="Sergila">Sergila</button>
+                <button class="category-filter" data-category="Bousra">Bousra</button>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div id="eventsGrid" class="events-grid">
+            <!-- Events will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="event-modal">
+        <div class="event-modal-content">
+            <div class="event-modal-header">
+                <h2 id="eventModalTitle">Event Details</h2>
+                <button class="event-modal-close" id="eventModalClose" aria-label="Close modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="event-modal-body" id="eventModalBody">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/JS/data.js"></script>
+    <script src="/JS/auth.js"></script>
+    <script src="/JS/events.js"></script>
+    <script src="/JS/api-service.js"></script>
+    
+    <script>
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check authentication
+            if (!AuthService.isAuthenticated()) {
+                window.location.href = '/HTML/index.html';
+                return;
+            }
+            
+            console.log('🎉 Events page loaded successfully');
+        });
+    </script>
+</body>
+</html>

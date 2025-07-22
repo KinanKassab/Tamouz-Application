@@ -1,0 +1,1065 @@
+/* 
+===========================================
+SCOUTPLUSE - COMPONENTS STYLESHEET
+===========================================
+
+This file contains styles for specific UI components used throughout
+the ScoutPluse application. Each component is self-contained and
+follows consistent design patterns.
+
+Components included:
+1. Event Cards - Display event information in card format
+2. Member Cards - Show member profiles and stats
+3. Information Grid - Educational content display
+4. Category Badges - Content categorization
+5. Action Buttons - Interactive elements
+6. Status Indicators - Visual status representation
+7. Search and Filter Components
+8. Pagination Controls
+9. Breadcrumb Navigation
+10. Tag System
+11. Avatar Groups
+12. Tooltip System
+*/
+
+/* 
+===========================================
+EVENT CARD COMPONENT
+===========================================
+Cards used to display event information with images,
+details, and interactive elements
+*/
+
+.event-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: 1px solid var(--border-light);
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+/* Event image container */
+.event-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.event-card:hover .event-image img {
+    transform: scale(1.05);
+}
+
+/* Event category badge */
+.event-category {
+    position: absolute;
+    top: var(--spacing-3);
+    right: var(--spacing-3);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-xl);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Category color variants */
+.category-outdoor {
+    background: var(--green-100);
+    color: var(--primary-800);
+}
+
+.category-service {
+    background: var(--blue-100);
+    color: var(--blue-800);
+}
+
+.category-education {
+    background: var(--amber-100);
+    color: var(--amber-800);
+}
+
+.category-competition {
+    background: var(--red-100);
+    color: var(--red-800);
+}
+
+/* Dark theme category colors */
+.dark .category-outdoor {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--primary-300);
+}
+
+.dark .category-service {
+    background: rgba(37, 99, 235, 0.2);
+    color: #93c5fd;
+}
+
+.dark .category-education {
+    background: var(--amber-900);
+    color: var(--amber-300);
+}
+
+.dark .category-competition {
+    background: rgba(220, 38, 38, 0.2);
+    color: #fca5a5;
+}
+
+/* Event content area */
+.event-content {
+    padding: var(--spacing-6);
+}
+
+.event-title {
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-3);
+    line-height: 1.4;
+}
+
+.event-description {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-4);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Event details list */
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
+}
+
+.event-detail {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.event-detail svg {
+    flex-shrink: 0;
+    color: var(--primary-600);
+}
+
+/* Attendance progress bar */
+.attendance-bar {
+    margin-bottom: var(--spacing-4);
+}
+
+.attendance-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    margin-bottom: var(--spacing-2);
+}
+
+.progress-bar {
+    height: 6px;
+    background: var(--gray-200);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.dark .progress-bar {
+    background: var(--gray-700);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-500), var(--secondary-500));
+    border-radius: 3px;
+    transition: width var(--transition-normal);
+}
+
+.recent-event-action {
+    margin-top: var(--spacing-3);
+    padding-top: var(--spacing-3);
+    border-top: 1px solid var(--border-light);
+}
+
+.clickable-event {
+    cursor: pointer;
+}
+
+.clickable-event:hover .recent-event-action .btn {
+    background: var(--primary-600);
+    color: white;
+    border-color: var(--primary-600);
+}
+
+/* 
+===========================================
+MEMBER CARD COMPONENT
+===========================================
+Cards for displaying member information and statistics
+*/
+
+.member-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-6);
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    transition: all var(--transition-fast);
+}
+
+.member-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-200);
+}
+
+/* Member avatar */
+.member-avatar {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
+    color: white;
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--font-size-xl);
+    margin: 0 auto var(--spacing-4);
+    box-shadow: var(--shadow-sm);
+}
+
+.member-name {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.member-role {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: var(--font-weight-medium);
+}
+
+.clickable-stat {
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-1);
+}
+
+.clickable-stat:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+    transform: scale(1.05);
+}
+
+.dark .clickable-stat:hover {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* Troop Members Modal */
+.troop-members-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+    padding: var(--spacing-4);
+    backdrop-filter: blur(8px);
+    animation: fadeIn var(--transition-normal) ease;
+}
+
+.troop-members-content {
+    background: var(--bg-primary);
+    border-radius: var(--radius-3xl);
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--border-color);
+    animation: slideUp var(--transition-normal) var(--transition-bounce);
+}
+
+.troop-members-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-6);
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+}
+
+.dark .troop-members-header {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(14, 165, 233, 0.1));
+    border-bottom-color: var(--gray-700);
+}
+
+.troop-members-header h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.troop-members-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+    min-width: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.troop-members-close:hover {
+    background-color: var(--gray-100);
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+.dark .troop-members-close:hover {
+    background-color: var(--gray-700);
+}
+
+.troop-members-list {
+    padding: var(--spacing-6);
+}
+
+.troop-member-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-fast);
+    margin-bottom: var(--spacing-2);
+}
+
+.troop-member-item:hover {
+    background: var(--gray-50);
+}
+
+.dark .troop-member-item:hover {
+    background: var(--gray-700);
+}
+
+.troop-member-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
+    color: white;
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.troop-member-info {
+    flex: 1;
+}
+
+.troop-member-name {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-0-5);
+}
+
+.troop-member-role {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    text-transform: capitalize;
+}
+
+/* Member statistics */
+.member-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: var(--spacing-4);
+    padding: var(--spacing-4) 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.member-stat {
+    text-align: center;
+}
+
+.member-stat-value {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-1);
+}
+
+.member-stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 
+===========================================
+INFORMATION GRID COMPONENT
+===========================================
+Grid layout for educational content and resources
+*/
+
+.information-grid {
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* When grid has content */
+.information-grid.has-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+    min-height: auto;
+}
+
+/* 
+===========================================
+CATEGORY BADGE COMPONENT
+===========================================
+Small badges for categorizing content
+*/
+
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    background: var(--gray-100);
+    border-radius: var(--radius-xl);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.dark .category-badge {
+    background: var(--gray-700);
+}
+
+.category-badge:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.dark .category-badge:hover {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* 
+===========================================
+ACTION BUTTON COMPONENT
+===========================================
+Small action buttons for interactive elements
+*/
+
+.action-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    background-color: var(--gray-100);
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+.dark .action-btn:hover {
+    background-color: var(--gray-700);
+}
+
+/* Danger variant */
+.action-btn-danger:hover {
+    background-color: var(--red-100);
+    color: var(--red-600);
+}
+
+.dark .action-btn-danger:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: #fca5a5;
+}
+
+/* 
+===========================================
+STATUS INDICATOR COMPONENT
+===========================================
+Visual indicators for status information
+*/
+
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--radius-xl);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+}
+
+.status-indicator::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+/* Status variants */
+.status-active {
+    background: var(--primary-100);
+    color: var(--primary-800);
+}
+
+.status-active::before {
+    background: var(--primary-600);
+}
+
+.status-inactive {
+    background: var(--gray-100);
+    color: var(--gray-800);
+}
+
+.status-inactive::before {
+    background: var(--gray-600);
+}
+
+/* Dark theme status colors */
+.dark .status-active {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+.dark .status-inactive {
+    background: var(--gray-700);
+    color: var(--gray-300);
+}
+
+/* 
+===========================================
+SEARCH AND FILTER COMPONENTS
+===========================================
+Search input and filter controls
+*/
+
+.search-filter-bar {
+    display: flex;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-6);
+    flex-wrap: wrap;
+}
+
+/* Search input container */
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+}
+
+.search-input input {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) 2.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color var(--transition-fast);
+}
+
+.search-input input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.search-input svg {
+    position: absolute;
+    left: var(--spacing-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+/* Filter dropdown */
+.filter-dropdown {
+    position: relative;
+}
+
+.filter-dropdown select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    padding: var(--spacing-3);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    min-width: 150px;
+}
+
+.filter-dropdown select:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* 
+===========================================
+PAGINATION COMPONENT
+===========================================
+Navigation controls for paginated content
+*/
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-8);
+}
+
+.pagination-btn {
+    padding: var(--spacing-2) var(--spacing-3);
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: var(--gray-100);
+    border-color: var(--gray-300);
+    transform: translateY(-1px);
+}
+
+.dark .pagination-btn:hover:not(:disabled) {
+    background-color: var(--gray-700);
+    border-color: var(--gray-600);
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-600);
+    border-color: var(--primary-600);
+    color: white;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 
+===========================================
+BREADCRUMB COMPONENT
+===========================================
+Navigation breadcrumb trail
+*/
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
+    font-size: var(--font-size-sm);
+}
+
+.breadcrumb-item {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb-item:hover {
+    color: var(--text-primary);
+}
+
+.breadcrumb-item:last-child {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+}
+
+/* 
+===========================================
+TAG COMPONENT
+===========================================
+Small tags for labeling and categorization
+*/
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    padding: var(--spacing-1) var(--spacing-2);
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.dark .tag {
+    background: var(--gray-700);
+}
+
+.tag:hover {
+    background: var(--primary-100);
+    color: var(--primary-700);
+}
+
+.dark .tag:hover {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* Primary tag variant */
+.tag-primary {
+    background: var(--primary-100);
+    color: var(--primary-800);
+}
+
+.dark .tag-primary {
+    background: var(--primary-900);
+    color: var(--primary-300);
+}
+
+/* 
+===========================================
+AVATAR GROUP COMPONENT
+===========================================
+Overlapping avatars for showing multiple users
+*/
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-group .user-avatar {
+    margin-left: -8px;
+    border: 2px solid var(--bg-primary);
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-xs);
+}
+
+.avatar-group .user-avatar:first-child {
+    margin-left: 0;
+}
+
+.avatar-group .avatar-more {
+    margin-left: -8px;
+    width: 32px;
+    height: 32px;
+    background: var(--gray-200);
+    color: var(--text-muted);
+    border: 2px solid var(--bg-primary);
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+}
+
+.dark .avatar-group .avatar-more {
+    background: var(--gray-700);
+}
+
+/* 
+===========================================
+TOOLTIP COMPONENT
+===========================================
+Hover tooltips for additional information
+*/
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gray-900);
+    color: white;
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius);
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-fast);
+    z-index: var(--z-tooltip);
+    margin-bottom: var(--spacing-1);
+}
+
+.tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--gray-900);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-fast);
+}
+
+.tooltip:hover::after,
+.tooltip:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 
+===========================================
+TOGGLE SWITCH COMPONENT
+===========================================
+Custom toggle switches for settings
+*/
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background: var(--gray-300);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.toggle-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: var(--radius-full);
+    transition: transform var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.toggle-switch.active {
+    background: var(--primary-600);
+}
+
+.toggle-switch.active::before {
+    transform: translateX(26px);
+}
+
+.dark .toggle-switch {
+    background: var(--gray-600);
+}
+
+.dark .toggle-switch::before {
+    background: var(--gray-200);
+}
+
+/* 
+===========================================
+RESPONSIVE ADJUSTMENTS
+===========================================
+Mobile-specific component adjustments
+*/
+
+@media (max-width: 768px) {
+    .event-image {
+        height: 160px;
+    }
+    
+    .event-content {
+        padding: var(--spacing-4);
+    }
+    
+    .member-card {
+        padding: var(--spacing-4);
+    }
+    
+    .member-avatar {
+        width: 48px;
+        height: 48px;
+        font-size: var(--font-size-lg);
+    }
+    
+    .search-filter-bar {
+        flex-direction: column;
+    }
+    
+    .search-input {
+        min-width: auto;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+    }
+    
+    .avatar-group .user-avatar,
+    .avatar-group .avatar-more {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-details {
+        gap: var(--spacing-1);
+    }
+    
+    .event-detail {
+        font-size: var(--font-size-xs);
+    }
+    
+    .member-stats {
+        padding: var(--spacing-3) 0;
+    }
+    
+    .member-stat-value {
+        font-size: var(--font-size-lg);
+    }
+    
+    .toggle-switch {
+        width: 44px;
+        height: 22px;
+    }
+    
+    .toggle-switch::before {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .toggle-switch.active::before {
+        transform: translateX(22px);
+    }
+}
+
+/* 
+===========================================
+ACCESSIBILITY ENHANCEMENTS
+===========================================
+Enhanced accessibility for components
+*/
+
+/* Focus styles for interactive components */
+.event-card:focus-visible,
+.member-card:focus-visible,
+.action-btn:focus-visible,
+.pagination-btn:focus-visible,
+.toggle-switch:focus-visible {
+    outline: 2px solid var(--primary-600);
+    outline-offset: 2px;
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+    .event-category,
+    .category-badge,
+    .status-indicator,
+    .tag {
+        border: 1px solid currentColor;
+    }
+    
+    .progress-bar {
+        border: 1px solid var(--text-primary);
+    }
+}
+
+/* Reduced motion adjustments */
+@media (prefers-reduced-motion: reduce) {
+    .event-card:hover .event-image img {
+        transform: none;
+    }
+    
+    .toggle-switch::before {
+        transition: none;
+    }
+}

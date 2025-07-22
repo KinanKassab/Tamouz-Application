@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Bashar",
+      "email": "leader@scouts.org",
+      "password": "Bashar",
+      "role": "leader",
+      "troop": "Ramita",
+      "phone": "+1 (555) 234-5678",
+      "joinDate": "2021-03-15"
+    },
+    {
+      "id": "1",
+      "name": "admin",
+      "email": "admin@scouts.org",
+      "password": "admin",
+      "role": "admin",
+      "troop": "Development",
+      "phone": "+1 (555) 123-4567",
+      "joinDate": "2010-16-8"
+    },
+    {
+      "id": "3",
+      "name": "Scout Member",
+      "email": "scout@scouts.org",
+      "password": "scout123",
+      "role": "member",
+      "troop": "Troop 101",
+      "badges": ["Camping", "Hiking", "First Aid"],
+      "phone": "+1 (555) 345-6789",
+      "joinDate": "2022-09-20"
+    },
+    {
+      "id": "4",
+      "name": "Alex Johnson",
+      "email": "alex@scouts.org",
+      "password": "alex123",
+      "role": "member",
+      "troop": "Troop 101",
+      "badges": ["Camping", "First Aid"],
+      "phone": "+1 (555) 456-7890",
+      "joinDate": "2023-01-12"
+    },
+    {
+      "id": "5",
+      "name": "Nora Alkassem",
+      "email": "Nora@kassem.org",
+      "password": "nora123",
+      "role": "admin",
+      "troop": "Development",
+      "badges": ["Leadership", "Camping", "Hiking", "First Aid"],
+      "phone": "+1 (555) 567-8901",
+      "joinDate": "2025-14-07"
+    }
+  ]
+}

@@ -1,0 +1,624 @@
+/* 
+===========================================
+SCOUTPLUSE - AUTHENTICATION STYLES
+===========================================
+
+This file contains all styles related to the authentication system,
+including the login screen, forms, and demo account selection.
+
+Features:
+1. Responsive login screen layout
+2. Animated form elements
+3. Demo account selection
+4. Error message styling
+5. Loading states
+6. Accessibility features
+*/
+
+/* 
+===========================================
+LOGIN SCREEN LAYOUT
+===========================================
+Full-screen login interface with centered content
+*/
+
+.login-screen {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-50) 0%, #e6fffa 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark theme background */
+.dark .login-screen {
+    background: linear-gradient(135deg, var(--gray-900) 0%, var(--primary-900) 100%);
+}
+
+/* Animated background elements */
+.login-screen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* 
+===========================================
+LOGIN CONTAINER
+===========================================
+Main container for login form and content
+*/
+
+.login-container {
+    width: 100%;
+    max-width: 28rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* 
+===========================================
+LOGIN HEADER
+===========================================
+Logo, title, and welcome message
+*/
+
+.login-header {
+    text-align: center;
+    margin-bottom: var(--spacing-8);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Application logo */
+.login-header .logo {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
+    border-radius: var(--radius-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--spacing-4);
+    color: white;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-fast);
+}
+
+.login-header .logo:hover {
+    transform: scale(1.05) rotate(5deg);
+}
+
+/* Main title */
+.login-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+    background: linear-gradient(135deg, var(--primary-600), var(--secondary-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Welcome message */
+.login-header p {
+    color: var(--text-secondary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+}
+
+/* 
+===========================================
+LOGIN FORM CONTAINER
+===========================================
+Card container for the login form
+*/
+
+.login-form-container {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-6);
+    box-shadow: var(--shadow-xl);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.login-form-container:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2xl);
+}
+
+/* 
+===========================================
+LOGIN FORM
+===========================================
+Form styling and input elements
+*/
+
+.login-form {
+    margin-bottom: var(--spacing-6);
+}
+
+/* Form group container */
+.form-group {
+    margin-bottom: var(--spacing-5);
+}
+
+/* Form labels */
+.form-group label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+    transition: color var(--transition-fast);
+}
+
+/* 
+===========================================
+INPUT GROUP STYLING
+===========================================
+Input fields with icons and interactive elements
+*/
+
+.input-group {
+    position: relative;
+}
+
+/* Input field icons */
+.input-icon {
+    position: absolute;
+    left: var(--spacing-3);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: color var(--transition-fast);
+    z-index: 2;
+}
+
+/* Input fields */
+.input-group input {
+    width: 100%;
+    padding: var(--spacing-3) var(--spacing-3) var(--spacing-3) 2.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-base);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+    font-family: inherit;
+}
+
+/* Input focus state */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Update icon color on focus */
+.input-group input:focus + .input-icon,
+.input-group input:focus ~ .input-icon {
+    color: var(--primary-500);
+}
+
+/* Input hover state */
+.input-group input:hover {
+    border-color: var(--border-strong);
+}
+
+/* 
+===========================================
+PASSWORD TOGGLE BUTTON
+===========================================
+Show/hide password functionality
+*/
+
+.password-toggle {
+    position: absolute;
+    right: var(--spacing-3);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--spacing-1);
+    border-radius: var(--radius);
+    transition: all var(--transition-fast);
+    z-index: 2;
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-toggle:hover {
+    color: var(--text-secondary);
+    background-color: var(--gray-100);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.dark .password-toggle:hover {
+    background-color: var(--gray-700);
+}
+
+/* 
+===========================================
+ERROR MESSAGES
+===========================================
+Error state styling for form validation
+*/
+
+.error-message {
+    background-color: var(--red-50);
+    border: 1px solid var(--red-200);
+    color: var(--red-700);
+    padding: var(--spacing-3);
+    border-radius: var(--radius-lg);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-4);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Dark theme error styling */
+.dark .error-message {
+    background-color: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #fca5a5;
+}
+
+/* Error icon */
+.error-message::before {
+    content: '⚠️';
+    font-size: var(--font-size-base);
+}
+
+/* 
+===========================================
+DEMO ACCOUNTS SECTION
+===========================================
+Quick access to demo user accounts
+*/
+
+.demo-accounts {
+    padding-top: var(--spacing-6);
+    border-top: 1px solid var(--border-light);
+    animation: fadeIn 1s ease-out 0.4s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Demo section title */
+.demo-title {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: var(--spacing-3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: var(--font-weight-medium);
+}
+
+/* Demo accounts list */
+.demo-account-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+/* Individual demo account button */
+.demo-account {
+    width: 100%;
+    text-align: left;
+    padding: var(--spacing-3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect */
+.demo-account:hover {
+    background-color: var(--gray-50);
+    border-color: var(--primary-200);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+}
+
+.dark .demo-account:hover {
+    background-color: var(--gray-700);
+    border-color: var(--primary-700);
+}
+
+/* Demo account role */
+.demo-role {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-1);
+}
+
+/* Demo account email */
+.demo-email {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* 
+===========================================
+LOADING STATES
+===========================================
+Loading spinner and button states
+*/
+
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Login button loading state */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Success state for login button */
+.btn-success {
+    background: linear-gradient(135deg, var(--green-600), var(--green-700)) !important;
+    border-color: var(--green-600) !important;
+}
+
+/* 
+===========================================
+RESPONSIVE DESIGN
+===========================================
+Mobile and tablet optimizations
+*/
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+    .login-screen {
+        padding: var(--spacing-3);
+    }
+    
+    .login-container {
+        max-width: 100%;
+    }
+    
+    .login-form-container {
+        padding: var(--spacing-5);
+    }
+    
+    .login-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .login-header .logo {
+        width: 3rem;
+        height: 3rem;
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 480px) {
+    .login-screen {
+        padding: var(--spacing-2);
+    }
+    
+    .login-form-container {
+        padding: var(--spacing-4);
+        border-radius: var(--radius-xl);
+    }
+    
+    .login-header {
+        margin-bottom: var(--spacing-6);
+    }
+    
+    .login-header h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    .login-header .logo {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .demo-accounts {
+        padding-top: var(--spacing-4);
+    }
+    
+    .input-group input {
+        padding: var(--spacing-2) var(--spacing-2) var(--spacing-2) 2.25rem;
+        font-size: var(--font-size-sm);
+    }
+    
+    .input-icon {
+        left: var(--spacing-2);
+    }
+    
+    .password-toggle {
+        right: var(--spacing-2);
+    }
+}
+
+/* 
+===========================================
+ACCESSIBILITY ENHANCEMENTS
+===========================================
+Improved accessibility features
+*/
+
+/* Focus styles for keyboard navigation */
+.demo-account:focus-visible,
+.password-toggle:focus-visible {
+    outline: 2px solid var(--primary-600);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .login-form-container {
+        border: 2px solid var(--text-primary);
+    }
+    
+    .input-group input {
+        border-width: 2px;
+    }
+    
+    .demo-account {
+        border-width: 2px;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .login-header,
+    .login-form-container,
+    .demo-accounts {
+        animation: none;
+    }
+    
+    .login-screen::before {
+        animation: none;
+    }
+    
+    .error-message {
+        animation: none;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+}
+
+/* 
+===========================================
+PRINT STYLES
+===========================================
+Optimized for printing (hide interactive elements)
+*/
+
+@media print {
+    .login-screen {
+        background: white;
+        color: black;
+    }
+    
+    .login-screen::before {
+        display: none;
+    }
+    
+    .demo-accounts,
+    .password-toggle {
+        display: none;
+    }
+    
+    .login-form-container {
+        box-shadow: none;
+        border: 1px solid black;
+    }
+}
+
+/* 
+===========================================
+UTILITY CLASSES
+===========================================
+Helper classes for authentication forms
+*/
+
+/* Form validation states */
+.input-group.error input {
+    border-color: var(--red-500);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.input-group.success input {
+    border-color: var(--green-500);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+/* Loading overlay for form submission */
+.form-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.form-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: inherit;
+    z-index: 10;
+}
+
+.dark .form-loading::after {
+    background: rgba(0, 0, 0, 0.8);
+}

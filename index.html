@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>ScoutPluse - Scout Management Platform</title>
+    
+    <!-- تحويل فوري إلى الصفحة الرئيسية -->
+    <meta http-equiv="refresh" content="0; url=/HTML/index.html">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #10b981, #0ea5e9);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .loading {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .redirect-link {
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">🏕️ ScoutPluse</div>
+    <div class="loading">جاري التحويل إلى التطبيق...</div>
+    <p>إذا لم يتم التحويل تلقائياً، <a href="/HTML/index.html" class="redirect-link">اضغط هنا</a></p>
+    
+    <script>
+        // تحويل فوري بـ JavaScript أيضاً
+        setTimeout(() => {
+            window.location.href = '/HTML/index.html';
+        }, 1000);
+    </script>
+</body>
+</html>

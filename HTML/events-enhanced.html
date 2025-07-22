@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Events - ScoutPluse</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/CSS/main.css">
+    <link rel="stylesheet" href="/CSS/components.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="/CSS/events-new.css">
+    <link rel="stylesheet" href="/CSS/api-enhancements.css">
+    
+    <!-- Theme detection script -->
+    <script>
+        (function() {
+            const theme = localStorage.getItem('scoutpluse_theme') || 'auto';
+            if (theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="events-page">
+        <!-- Page Header -->
+        <div class="events-header">
+            <h1>Enhanced Events</h1>
+            <div class="events-header-actions">
+                <button class="sync-btn" id="syncEventsBtn" title="Sync with server">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23,4 23,10 17,10"></polyline>
+                        <polyline points="1,20 1,14 7,14"></polyline>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                    </svg>
+                    Sync
+                </button>
+                <button class="btn btn-primary" id="createEventBtn" style="display: none;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Create Event
+                </button>
+            </div>
+        </div>
+
+        <!-- API Status and Sync Info -->
+        <div class="sync-status" id="syncStatus" style="display: none;">
+            <div class="sync-indicator"></div>
+            <span>Connected to API</span>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="events-controls">
+            <div class="search-container">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="eventsSearch" class="search-input" placeholder="Search events by title, description, or location...">
+            </div>
+            
+            <div class="category-filters">
+                <button class="category-filter active" data-category="all">All Events</button>
+                <button class="category-filter" data-category="ramita">Ramita</button>
+                <button class="category-filter" data-category="ma3lola">Ma3lola</button>
+                <button class="category-filter" data-category="Sergila">Sergila</button>
+                <button class="category-filter" data-category="Bousra">Bousra</button>
+            </div>
+        </div>
+
+        <!-- API Connection Test -->
+        <div class="api-test-section" style="margin-bottom: var(--spacing-6);">
+            <button class="btn btn-outline btn-sm" id="testApiBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                Test API Connection
+            </button>
+            <div id="apiTestResult"></div>
+        </div>
+
+        <!-- Events Grid -->
+        <div id="eventsGrid" class="events-grid">
+            <!-- Events will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Event Modal -->
+    <div id="eventModal" class="event-modal">
+        <div class="event-modal-content">
+            <div class="event-modal-header">
+                <h2 id="eventModalTitle">Event Details</h2>
+                <button class="event-modal-close" id="eventModalClose" aria-label="Close modal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="event-modal-body" id="eventModalBody">
+                <!-- Modal content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Connection Status Indicator -->
+    <div class="connection-status" id="connectionStatus">
+        <div class="connection-indicator" id="connectionIndicator"></div>
+        <span id="connectionText">Checking connection...</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/JS/data.js"></script>
+    <script src="/JS/auth.js"></script>
+    <script src="/JS/api-service.js"></script>
+    <script src="/JS/events-enhanced.js"></script>
+    
+    <script>
+        // Initialize the enhanced events page
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check authentication
+            if (!AuthService.isAuthenticated()) {
+                window.location.href = '/HTML/index.html';
+                return;
+            }
+            
+            console.log('🎉 Enhanced Events page loaded successfully');
+            
+            // Test API connection on load
+            setTimeout(testAPIConnection, 1000);
+            
+            // Setup API test button
+            const testApiBtn = document.getElementById('testApiBtn');
+            if (testApiBtn) {
+                testApiBtn.addEventListener('click', testAPIConnection);
+            }
+            
+            // Update connection status periodically
+            setInterval(updateConnectionStatus, 30000); // Every 30 seconds
+        });
+        
+        // Test API Connection
+        async function testAPIConnection() {
+            const testBtn = document.getElementById('testApiBtn');
+            const resultDiv = document.getElementById('apiTestResult');
+            
+            if (testBtn) {
+                testBtn.disabled = true;
+                testBtn.innerHTML = `
+                    <svg class="loading-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12a9 9 0 11-6.219-8.56"></path>
+                    </svg>
+                    Testing...
+                `;
+            }
+            
+            try {
+                const result = await window.apiService.testConnection();
+                
+                if (resultDiv) {
+                    resultDiv.className = `api-test-result ${result.success ? 'api-test-success' : 'api-test-error'}`;
+                    resultDiv.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${result.success 
+                                ? '<polyline points="20,6 9,17 4,12"></polyline>' 
+                                : '<circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line>'
+                            }
+                        </svg>
+                        <span>${result.message}${result.success ? ` (${result.eventsCount} events available)` : ''}</span>
+                    `;
+                }
+                
+                updateConnectionStatus(result.success);
+                
+            } catch (error) {
+                if (resultDiv) {
+                    resultDiv.className = 'api-test-result api-test-error';
+                    resultDiv.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        <span>Connection test failed: ${error.message}</span>
+                    `;
+                }
+                
+                updateConnectionStatus(false);
+            } finally {
+                if (testBtn) {
+                    testBtn.disabled = false;
+                    testBtn.innerHTML = `
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <circle cx="12" cy="12" r="10"></circle>
+                        </svg>
+                        Test API Connection
+                    `;
+                }
+            }
+        }
+        
+        // Update Connection Status Indicator
+        function updateConnectionStatus(isConnected = null) {
+            const indicator = document.getElementById('connectionIndicator');
+            const text = document.getElementById('connectionText');
+            
+            if (isConnected === null) {
+                // Test connection
+                window.apiService.testConnection().then(result => {
+                    updateConnectionStatus(result.success);
+                }).catch(() => {
+                    updateConnectionStatus(false);
+                });
+                return;
+            }
+            
+            if (indicator) {
+                indicator.className = `connection-indicator ${isConnected ? '' : 'disconnected'}`;
+            }
+            
+            if (text) {
+                text.textContent = isConnected ? 'API Connected' : 'API Disconnected';
+            }
+            
+            // Update sync status
+            const syncStatus = document.getElementById('syncStatus');
+            if (syncStatus) {
+                syncStatus.style.display = isConnected ? 'flex' : 'none';
+            }
+        }
+        
+        // Show notification helper
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            
+            const icons = {
+                success: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"></polyline></svg>',
+                error: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>',
+                info: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>',
+                warning: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>'
+            };
+            
+            notification.innerHTML = `
+                ${icons[type] || icons.info}
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+        
+        // Make helper available globally
+        window.showNotification = showNotification;
+    </script>
+</body>
+</html>
